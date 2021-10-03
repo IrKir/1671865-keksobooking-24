@@ -92,6 +92,8 @@ const ALL_PHOTOS = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
 ];
 
+const ANNOUNCEMENT_COUNT = 10;
+
 const getRandomPositiveInteger = (start, finish) => {
   const lower = Math.ceil(Math.min(Math.abs(start), Math.abs(finish)));
   const upper = Math.floor(Math.max(Math.abs(start), Math.abs(finish)));
@@ -109,24 +111,46 @@ function getRandomPositiveFloat (start, finish, digits = 1) {
 const getRandomArrayElement = (elements) =>
   elements[_.random(0, elements.length - 1)];
 
-
-const getArrayRandomLengthElement = (elements, arrayLength) => {
-  let i = 0;
+const getArrayRandomLengthUnique = (elements, arrayLength) => {
+  let ind = 0;
   const newElements = [];
   do {
     const newElement = (elements[_.random(0, elements.length - 1)]);
     newElements.push(newElement);
     const index = elements.indexOf(newElement);
     elements.splice(index, 1);
-    i++;
-  } while (i < arrayLength);
-  elements = newElements;
+    ind++;
+  } while (ind < arrayLength);
+  return elements = newElements;
 };
 
-const author = () =>
-  ({
-    avatar: `img/avatars/user${getRandomArrayElement(NUMBERS_PHOTO)}.png`,
-  });
+const getArrayRandomLengthElement = (elements, arrayLength) => {
+  let ind = 0;
+  const newElements = [];
+  do {
+    const newElement = (elements[_.random(0, elements.length - 1)]);
+    newElements.push(newElement);
+    ind++;
+  } while (ind < arrayLength);
+  return elements = newElements;
+};
+
+const author = () => {
+  const numberAddress = [];
+  const newElement = NUMBERS_PHOTO[_.random(1, 10)];
+  for (let ind = 0; ind <= numberAddress.length - 1; ind++) {
+    if (newElement !== numberAddress[ind]) {
+      numberAddress.push(newElement);
+      return console.log(numberAddress);
+    }
+    return;
+  }
+};
+
+const locations = () => ({
+  lat: getRandomPositiveFloat(35.65000, 35.70000, 5),
+  lng: getRandomPositiveFloat(139.70000, 139.80000, 5),
+});
 
 const offer = () => ({
   title: getRandomArrayElement(TITLES),
@@ -137,17 +161,23 @@ const offer = () => ({
   guests: getRandomPositiveInteger(0, 100),
   checkin: getRandomArrayElement(CHECK_IN_HOURS),
   checkout: getRandomArrayElement(CHECK_OUT_HOURS),
-  features: getArrayRandomLengthElement(ALL_FEATURES, 3),
+  features: getArrayRandomLengthUnique(ALL_FEATURES, 3),
   description: getRandomArrayElement(DESCRIPTIONS),
-  photos: getArrayRandomLengthElement(ALL_PHOTOS, 3),
-});
-
-const locations = () => ({
-  lat: getRandomPositiveFloat(35.65000, 35.70000, 5),
-  lng: getRandomPositiveFloat(139.70000, 139.80000, 5),
+  photos: getArrayRandomLengthElement(ALL_PHOTOS, 2),
 });
 
 console.log(author());
 console.log(offer());
 console.log(locations());
 
+const allAnnoucement =[];
+
+for (let ind = 0; ind < ANNOUNCEMENT_COUNT; ind++) {
+  const announcement = {
+    author: author(),
+    locations: locations(),
+    offer: offer(),
+  };
+  allAnnoucement.push(announcement);
+}
+console.log(allAnnoucement);
