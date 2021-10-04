@@ -109,11 +109,13 @@ const announcement = () => {
   const locationLat = getRandomPositiveFloat(35.65000, 35.70000, 4);
   const locationLng = getRandomPositiveFloat(139.70000, 139.80000, 5);
   let index;
-  if (count < ANNOUNCEMENT_COUNT) {
+  if (count < ANNOUNCEMENT_COUNT - 1) {
+    count = count + 1;
+    index = `0${count}`;
+  } else {
     count = count + 1;
     index = `${count}`;
   }
-  index = `0${count}`;
   return {
     author: {
       avatar: `img/avatars/user${index}.png`,
