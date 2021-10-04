@@ -1,36 +1,3 @@
-/*function getIntegerFromRange(min, max) {
-  if (min < 0 || max <= min) {
-    return false;
-  }
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
-
-getIntegerFromRange(1, 100);
-
-function getFloatFromRange(min, max, numberOfSigns) {
-  if (min < 0 || max <= min) {
-    return false;
-  }
-  const  randomNumber =  (Math.random() * (max - min + 1) + min);
-  return +randomNumber.toFixed(numberOfSigns);
-}
-
-getFloatFromRange(0.3, 100, 6);*/
-
-/* массив author состоит из одного ключа avatar, строка  — адрес изображения вида img/avatars/user{{xx}}.png, где {{xx}} — это число от 1 до 10*/
-const NUMBERS_PHOTO = [
-  '01',
-  '02',
-  '03',
-  '04',
-  '05',
-  '06',
-  '07',
-  '08',
-  '09',
-  '10',
-];
-
 const TITLES = [
   'Уютное бунгало на острове Пасхи',
   'Вместительная юрта в степях Казахстана',
@@ -124,7 +91,7 @@ const getArrayRandomLengthUnique = (elements, arrayLength) => {
   return elements = newElements;
 };
 
-const getArrayRandomLengthElement = (elements, arrayLength) => {
+const getArrayRandomLengthElement = (elements, arrayLength = 0) => {
   let ind = 0;
   const newElements = [];
   do {
@@ -135,22 +102,26 @@ const getArrayRandomLengthElement = (elements, arrayLength) => {
   return elements = newElements;
 };
 
+let count = 0;
 const author = () => {
-  const numberAddress = [];
-  const newElement = NUMBERS_PHOTO[_.random(1, 10)];
-  for (let ind = 0; ind <= numberAddress.length - 1; ind++) {
-    if (newElement !== numberAddress[ind]) {
-      numberAddress.push(newElement);
-      return console.log(numberAddress);
+  for (let ind = count; ind <= ANNOUNCEMENT_COUNT; ind++) {
+    if (ind < ANNOUNCEMENT_COUNT) {
+      count = ind+1;
+      return {
+        avatar: `img/avatars/user0${ind}.png`,
+      };
     }
-    return;
+    return {
+      avatar: `img/avatars/user${ind}.png`,
+    };
   }
 };
 
-const locations = () => ({
-  lat: getRandomPositiveFloat(35.65000, 35.70000, 5),
-  lng: getRandomPositiveFloat(139.70000, 139.80000, 5),
-});
+const locations = () =>
+  ({
+    lat: getRandomPositiveFloat(35.65000, 35.70000, 5),
+    lng: getRandomPositiveFloat(139.70000, 139.80000, 5),
+  });
 
 const offer = () => ({
   title: getRandomArrayElement(TITLES),
@@ -166,10 +137,6 @@ const offer = () => ({
   photos: getArrayRandomLengthElement(ALL_PHOTOS, 2),
 });
 
-console.log(author());
-console.log(offer());
-console.log(locations());
-
 const allAnnoucement =[];
 
 for (let ind = 0; ind < ANNOUNCEMENT_COUNT; ind++) {
@@ -180,4 +147,3 @@ for (let ind = 0; ind < ANNOUNCEMENT_COUNT; ind++) {
   };
   allAnnoucement.push(announcement);
 }
-console.log(allAnnoucement);
