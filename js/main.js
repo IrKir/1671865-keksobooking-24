@@ -101,35 +101,22 @@ const getArrayRandomLengthElement = (elements, arrayLength) => {
     newElements.push(newElement);
     ind++;
   } while (ind < arrayLength);
-  console.log(newElements);
   return dellElements = newElements;
 };
 
-/*const author = () => {
-  for (let ind = count; ind <= ANNOUNCEMENT_COUNT; ind++) {
-    if (ind < ANNOUNCEMENT_COUNT) {
-      count = ind+1;
-      return {
-        avatar: `img/avatars/user0${ind}.png`,
-      };
-    }
-    return {
-      avatar: `img/avatars/user${ind}.png`,
-    };
-  }
-};*/
 let count = 0;
 const announcement = () => {
   const locationLat = getRandomPositiveFloat(35.65000, 35.70000, 4);
   const locationLng = getRandomPositiveFloat(139.70000, 139.80000, 5);
-    if (count < ANNOUNCEMENT_COUNT) {
-      count = count + 1;
-      index = '' + count;
-    };
-  index = '0' + count;
+  let index;
+  if (count < ANNOUNCEMENT_COUNT) {
+    count = count + 1;
+    index = `${count}`;
+  }
+  index = `0${count}`;
   return {
     author: {
-      avatar: 'img/avatars/user' + index + '.png',
+      avatar: `img/avatars/user${index}.png`,
     },
     offer: {
       title: getRandomArrayElement(TITLES),
