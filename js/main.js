@@ -108,7 +108,7 @@ let count = 0;
 const announcement = () => {
   const featuresLength = getRandomPositiveInteger(1, 6);
   const photosLength = getRandomPositiveInteger(1, 3);
-  const locationLat = getRandomPositiveFloat(35.65000, 35.70000, 4);
+  const locationLat = getRandomPositiveFloat(35.65000, 35.70000, 5);
   const locationLng = getRandomPositiveFloat(139.70000, 139.80000, 5);
   let index;
   if (count < ANNOUNCEMENT_COUNT - 1) {
