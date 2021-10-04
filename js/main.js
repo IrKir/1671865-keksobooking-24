@@ -106,6 +106,8 @@ const getArrayRandomLengthElement = (elements, arrayLength) => {
 
 let count = 0;
 const announcement = () => {
+  const featuresLength = getRandomPositiveInteger(1, 6);
+  const photosLength = getRandomPositiveInteger(1, 3);
   const locationLat = getRandomPositiveFloat(35.65000, 35.70000, 4);
   const locationLng = getRandomPositiveFloat(139.70000, 139.80000, 5);
   let index;
@@ -129,9 +131,9 @@ const announcement = () => {
       guests: getRandomPositiveInteger(0, 100),
       checkin: getRandomArrayElement(CHECK_IN_HOURS),
       checkout: getRandomArrayElement(CHECK_OUT_HOURS),
-      features: getArrayRandomLengthUnique(ALL_FEATURES, 4),
+      features: getArrayRandomLengthUnique(ALL_FEATURES, featuresLength),
       description: getRandomArrayElement(DESCRIPTIONS),
-      photos: getArrayRandomLengthElement(ALL_PHOTOS, 2),
+      photos: getArrayRandomLengthElement(ALL_PHOTOS, photosLength),
     },
     location: {
       lat: locationLat,
