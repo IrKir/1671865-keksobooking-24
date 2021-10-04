@@ -4,7 +4,7 @@ const TITLES = [
   'Тёплое иглу в дебрях Канады',
   'Минка в тихой сельской местности',
   'Обрядовый вигвам на 25 человек',
-  'Небоскрёб в центре НьЙорка',
+  'Небоскрёб в центре Нью-Йорка',
   'Избушка на курьих ножках, очень быстрая',
   'Неприступная сакля в горах',
   'Египетская пирамида, недорого',
@@ -80,30 +80,32 @@ const getRandomArrayElement = (elements) =>
 
 const getArrayRandomLengthUnique = (elements, arrayLength) => {
   let ind = 0;
+  let dellElements = elements.slice();
   const newElements = [];
   do {
-    const newElement = (elements[_.random(0, elements.length - 1)]);
+    const newElement = (dellElements[_.random(0, dellElements.length - 1)]);
     newElements.push(newElement);
-    const index = elements.indexOf(newElement);
-    elements.splice(index, 1);
+    const index = dellElements.indexOf(newElement);
+    dellElements.splice(index, 1);
     ind++;
   } while (ind < arrayLength);
-  return elements = newElements;
+  return dellElements = newElements;
 };
 
-const getArrayRandomLengthElement = (elements, arrayLength = 0) => {
+const getArrayRandomLengthElement = (elements, arrayLength) => {
   let ind = 0;
+  let dellElements = elements.slice();
   const newElements = [];
   do {
-    const newElement = (elements[_.random(0, elements.length - 1)]);
+    const newElement = (dellElements[_.random(0, dellElements.length - 1)]);
     newElements.push(newElement);
     ind++;
   } while (ind < arrayLength);
-  return elements = newElements;
+  console.log(newElements);
+  return dellElements = newElements;
 };
 
-let count = 0;
-const author = () => {
+/*const author = () => {
   for (let ind = count; ind <= ANNOUNCEMENT_COUNT; ind++) {
     if (ind < ANNOUNCEMENT_COUNT) {
       count = ind+1;
@@ -115,35 +117,42 @@ const author = () => {
       avatar: `img/avatars/user${ind}.png`,
     };
   }
+};*/
+let count = 0;
+const announcement = () => {
+  const locationLat = getRandomPositiveFloat(35.65000, 35.70000, 4);
+  const locationLng = getRandomPositiveFloat(139.70000, 139.80000, 5);
+    if (count < ANNOUNCEMENT_COUNT) {
+      count = count + 1;
+      index = '' + count;
+    };
+  index = '0' + count;
+  return {
+    author: {
+      avatar: 'img/avatars/user' + index + '.png',
+    },
+    offer: {
+      title: getRandomArrayElement(TITLES),
+      address: String(`${locationLat}, ${ locationLng}`),
+      price: getRandomPositiveInteger(0, 100000),
+      type: getRandomArrayElement(TYPES),
+      rooms: getRandomPositiveInteger(0, 100),
+      guests: getRandomPositiveInteger(0, 100),
+      checkin: getRandomArrayElement(CHECK_IN_HOURS),
+      checkout: getRandomArrayElement(CHECK_OUT_HOURS),
+      features: getArrayRandomLengthUnique(ALL_FEATURES, 4),
+      description: getRandomArrayElement(DESCRIPTIONS),
+      photos: getArrayRandomLengthElement(ALL_PHOTOS, 2),
+    },
+    location: {
+      lat: locationLat,
+      lng: locationLng,
+    },
+  };
 };
 
-const locations = () =>
-  ({
-    lat: getRandomPositiveFloat(35.65000, 35.70000, 5),
-    lng: getRandomPositiveFloat(139.70000, 139.80000, 5),
-  });
-
-const offer = () => ({
-  title: getRandomArrayElement(TITLES),
-  address: locations(),
-  price: getRandomPositiveInteger(0, 100000),
-  type: getRandomArrayElement(TYPES),
-  rooms: getRandomPositiveInteger(0, 100),
-  guests: getRandomPositiveInteger(0, 100),
-  checkin: getRandomArrayElement(CHECK_IN_HOURS),
-  checkout: getRandomArrayElement(CHECK_OUT_HOURS),
-  features: getArrayRandomLengthUnique(ALL_FEATURES, 3),
-  description: getRandomArrayElement(DESCRIPTIONS),
-  photos: getArrayRandomLengthElement(ALL_PHOTOS, 2),
-});
-
-const allAnnoucement =[];
-
-for (let ind = 0; ind < ANNOUNCEMENT_COUNT; ind++) {
-  const announcement = {
-    author: author(),
-    locations: locations(),
-    offer: offer(),
-  };
-  allAnnoucement.push(announcement);
+const allAnnoucement = [];
+for (let ind = 0; ind < 10; ind++) {
+  const newAnnouncement = announcement();
+  allAnnoucement.push(newAnnouncement);
 }
