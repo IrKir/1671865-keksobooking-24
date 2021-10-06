@@ -1,6 +1,7 @@
 import {getRandomPositiveInteger} from './get-random-positive-integer.js';
 import {getRandomPositiveFloat} from './get-random-positive-float.js';
 import {
+  AVATAR_NUMBER,
   TITLES,
   TYPES,
   CHECK_IN_HOURS,
@@ -14,25 +15,14 @@ import {
   getArrayRandomLengthElement
 } from './utils.js';
 
-let count = 0;
 const getElement = () => {
   const featuresLength = getRandomPositiveInteger(1, 6);
   const photosLength = getRandomPositiveInteger(1, 3);
   const locationLat = getRandomPositiveFloat(35.65000, 35.70000, 5);
   const locationLng = getRandomPositiveFloat(139.70000, 139.80000, 5);
-  let index;
-  if (count < ANNOUNCEMENT_COUNT) {
-    count = count + 1;
-    index = `0${count}`;
-  } else {
-    count = count + 1;
-    index = `${count}`;
-  }
-  console.log(count);
-  console.log(index);
   return {
     author: {
-      avatar: `img/avatars/user${index}.png`,
+      avatar: `img/avatars/user${AVATAR_NUMBER.shift()}.png`,
     },
     offer: {
       title: getRandomArrayElement(TITLES),
@@ -54,7 +44,4 @@ const getElement = () => {
   };
 };
 
-const getFinalArray = () =>
-  Array.from({length:ANNOUNCEMENT_COUNT}, getElement);
-
-export {getFinalArray};
+export {getElement, ANNOUNCEMENT_COUNT};

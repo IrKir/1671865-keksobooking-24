@@ -1,3 +1,16 @@
+const AVATAR_NUMBER = [
+  '01',
+  '02',
+  '03',
+  '04',
+  '05',
+  '06',
+  '07',
+  '08',
+  '09',
+  '10',
+];
+
 const TITLES = [
   'Уютное бунгало на острове Пасхи',
   'Вместительная юрта в степях Казахстана',
@@ -59,7 +72,7 @@ const ALL_PHOTOS = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
 ];
 
-const ANNOUNCEMENT_COUNT = 9;
+const ANNOUNCEMENT_COUNT = 10;
 
 const getRandomArrayElement = (elements) =>
   elements[_.random(0, elements.length - 1)];
@@ -91,6 +104,7 @@ const getArrayRandomLengthElement = (elements, arrayLength) => {
 };
 
 export {
+  AVATAR_NUMBER,
   TITLES,
   TYPES,
   CHECK_IN_HOURS,

@@ -1,4 +1,5 @@
-import {getFinalArray} from './data.js';
+import {getElement, ANNOUNCEMENT_COUNT} from './data.js';
 
-getFinalArray();
-console.log(getFinalArray());
+const finalArray = Array.from({length:ANNOUNCEMENT_COUNT}, getElement);
+
+export{finalArray};
