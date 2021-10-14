@@ -44,4 +44,5 @@ const getElement = () => {
   };
 };
 
-export {getElement, ANNOUNCEMENT_COUNT};
+const finalArray = Array.from({length:ANNOUNCEMENT_COUNT}, getElement);
+export {finalArray};
