@@ -37,9 +37,9 @@ featuresList.forEach((featuresListItem) => {
 
 if (!finalArray[0].offer.description) {
   popupClone.querySelector('.popup__description').classList.add('visually-hidden');
+} else {
+  popupClone.querySelector('.popup__description').textContent = finalArray[0].offer.description;
 }
-
-popupClone.querySelector('.popup__description').textContent = finalArray[0].offer.description;
 
 
 const popupPhotos = popupClone.querySelector('.popup__photos');
