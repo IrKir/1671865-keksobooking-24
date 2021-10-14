@@ -51,9 +51,6 @@ finalArray[0].offer.photos.forEach((photoItem) => {
   img.src = photoItem;
   img.width = 45;
   img.height = 40;
-  if (!img.src) {
-    photoItem.remove();
-  }
   popupPhotos.appendChild(img);
 });
 
