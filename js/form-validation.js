@@ -1,4 +1,6 @@
-const adTitleInput = document.querySelector('#title');
+const adForm = document.querySelector('.ad-form');
+const adTitleInput = adForm.querySelector('#title');
+const adType = adForm.querySelector('#type');
 
 const MIN_AD_LENGTH = 30;
 const MAX_AD_LENGTH = 100;
