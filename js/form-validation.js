@@ -1,8 +1,3 @@
-const adForm = document.querySelector('.ad-form');
-const adTitleInput = adForm.querySelector('#title');
-const adType = adForm.querySelector('#type');
-const adPrice = adForm.querySelector('#price');
-
 const MIN_AD_LENGTH = 30;
 const MAX_AD_LENGTH = 100;
 
@@ -14,31 +9,53 @@ const MIN_RENT_PRICE = {
   palace: 10000,
 };
 
-const adPriceMin = MIN_RENT_PRICE[adType.value];
-const adPriceMax = Number(adPrice.getAttribute('max'));
-
-const onChangeTitle = () => {
-  const valueLength = adTitleInput.value.lenght;
-
-  if (valueLength < MIN_AD_LENGTH) {
-    adTitleInput.setCustomValidity(`Ещё ${  MIN_AD_LENGTH - valueLength } симв.`);
-  } else if (valueLength <MAX_AD_LENGTH) {
-    adTitleInput.setCustomValidity(`Удалите лишние ${  valueLength - MAX_AD_LENGTH } симв.`);
-  } else {
-    adTitleInput.setCustomValidity('');
-  }
-
-  adTitleInput.reportValidity();
+const MATCHING_OF_ROOMS_AND_GUESTS = {
+  1: [1],
+  2: [1, 2],
+  3: [1, 2, 3],
+  100: [0],
 };
 
+const adForm = document.querySelector('.ad-form');
+const adTitle = adForm.querySelector('#title');
+const adType = adForm.querySelector('#type');
+const adPrice = adForm.querySelector('#price');
+const adTimeIn = adForm.querySelector('#timein');
+const adTimeOut = adForm.querySelector('#timeout');
+const adRoomsNumber = adForm.querySelector('#room_number');
+const adGuestsNumber = adForm.querySelector('#capacity');
+const inputElement = adForm.querySelector('input');
+
+const adPriceMin = MIN_RENT_PRICE[adType.value];
+const adPriceMax = adPrice.getAttribute('max');
+
+//Проверка валидности поля input
+
+
+// Проверка валидности заголовка
+const onChangeTitle = () => {
+  const valueLength = adTitle.value.lenght;
+
+  if (valueLength < MIN_AD_LENGTH) {
+    adTitle.setCustomValidity(`Ещё ${  MIN_AD_LENGTH - valueLength } симв.`);
+  } else if (valueLength <MAX_AD_LENGTH) {
+    adTitle.setCustomValidity(`Удалите лишние ${  valueLength - MAX_AD_LENGTH } симв.`);
+  } else {
+    adTitle.setCustomValidity('');
+  }
+
+  adTitle.reportValidity();
+};
 onChangeTitle();
 
+// Присвоение минимальной цены в зависимости от типа жилья
 const onChangeDwelling = () => {
   adPrice.placeholder = adPriceMin;
   adPrice.min = adPriceMin;
 };
 onChangeDwelling();
 
+// Проверка валидности цены
 const onChangePrice = () => {
   const currentPrice = adPrice.value;
   if (currentPrice > adPriceMax) {
@@ -46,11 +63,47 @@ const onChangePrice = () => {
   } else if (currentPrice < adPriceMin) {(   `Цена должна быть не менее ${adPriceMin}`);
   }
 };
-
 onChangePrice();
 
+//Установка соответствия времени въезда и выезда
+const onChangeTime = (evt) => {
+  if (evt.target === adTimeIn) {
+    adTimeOut.value = adTimeIn.value;
+  }
+  if (evt.target === adTimeOut) {
+    adTimeIn.value = adTimeOut.value;
+  }
+};
+onChangeTime();
 
+//Проверка валидности гостей-комнат
+const checkMatchingRoomsAndGuests = () => {
+  const roomsNumber = adRoomsNumber.value;
+  const guestsNumber = adGuestsNumber.value;
+  if (!MATCHING_OF_ROOMS_AND_GUESTS[roomsNumber].includes(guestsNumber)) {
+    adGuestsNumber.setCustomValidity('Выберите верное количество гостей или комнат');
+  } else {
+    adGuestsNumber.setCustomValidity('');
+    adRoomsNumber.setCustomValidity('');
+  }
 
+  adGuestsNumber.reportValidity();
+  adRoomsNumber.reportValidity();
+};
+checkMatchingRoomsAndGuests();
+
+/* Общая функция проверки валидности
+const adFormValidation = () => {
+  adTitle.addEventListener('input', onChangeTitle);
+  adPrice.addEventListener('input', onChangePrice);
+  adType.addEventListener('change', onChangeDwelling);
+  adTimeIn.addEventListener('change', onChangeTime);
+  adTimeOut.addEventListener('change', onChangeTime);
+  adRoomsNumber.addEventListener('change', checkMatchingRoomsAndGuests);
+  adGuestsNumber.addEventListener('change', checkMatchingRoomsAndGuests);
+};
+
+adFormValidation();*/
 
 /*function onPriseChange (evt) {
   if (evt.target.matches('select.options[select.selectedIndex]')) {
