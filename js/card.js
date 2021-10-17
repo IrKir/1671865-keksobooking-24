@@ -17,7 +17,9 @@ const getMarkupSimilarElements = () => {
   popupClone.querySelector('.popup__title').textContent = finalArray[0].offer.title;
   popupClone.querySelector('.popup__text--address').textContent = finalArray[0].offer.address;
   popupClone.querySelector('.popup__text--price').textContent = `${finalArray[0].offer.price  } ₽/ночь`;
+
   popupClone.querySelector('.popup__type').textContent = HOUSING_TYPE[finalArray[0].offer.type];
+
   popupClone.querySelector('.popup__text--capacity').textContent = `${finalArray[0].offer.rooms  } комнаты для ${  finalArray[0].offer.guests  } гостей`;
   popupClone.querySelector('.popup__text--time').textContent = `Заезд после ${  finalArray[0].offer.checkin  }, выезд до ${  finalArray[0].offer.checkout}`;
   const userFeatures = finalArray[0].offer.features;
