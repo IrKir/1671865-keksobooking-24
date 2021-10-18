@@ -47,7 +47,6 @@ const onChangeDwelling = () => {
   adPrice.placeholder = MIN_RENT_PRICE[adType.value];
   adPrice.min = MIN_RENT_PRICE[adType.value];
 };
-onChangeDwelling();
 
 // Проверка валидности цены
 const onChangePrice = () => {
@@ -64,7 +63,6 @@ const onChangePrice = () => {
 
   adPrice.reportValidity();
 };
-onChangePrice();
 
 //Установка соответствия времени въезда и выезда
 const onChangeTime = (evt) => {
@@ -77,9 +75,9 @@ const onChangeTime = (evt) => {
 };
 
 //Проверка валидности гостей-комнат
-const checkMatchingRoomsAndGuests = () => {
-  const roomsNumber = adRoomsNumber.value;
-  const guestsNumber = adGuestsNumber.value;
+const onNumberRoomChange = () => {
+  const roomsNumber =  Number(adRoomsNumber.value);
+  const guestsNumber = Number(adGuestsNumber.value);
   if (!MATCHING_OF_ROOMS_AND_GUESTS[roomsNumber].includes(guestsNumber)) {
     adGuestsNumber.setCustomValidity('Выберите верное количество гостей или комнат');
   } else {
@@ -91,7 +89,6 @@ const checkMatchingRoomsAndGuests = () => {
   adRoomsNumber.reportValidity();
 };
 
-
 // Общая функция проверки валидности
 const adFormValidation = () => {
   adTitle.addEventListener('input', onChangeTitle);
@@ -99,17 +96,8 @@ const adFormValidation = () => {
   adType.addEventListener('change', onChangeDwelling);
   adTimeIn.addEventListener('change', onChangeTime);
   adTimeOut.addEventListener('change', onChangeTime);
-  adRoomsNumber.addEventListener('change', checkMatchingRoomsAndGuests);
-  adGuestsNumber.addEventListener('change', checkMatchingRoomsAndGuests);
+  adRoomsNumber.addEventListener('change', onNumberRoomChange);
+  adGuestsNumber.addEventListener('change', onNumberRoomChange);
 };
 
 adFormValidation();
-
-/*function onPriseChange (evt) {
-  if (evt.target.matches('select.options[select.selectedIndex]')) {
-    adPrice.min = MIN_RENT_PRICE.evt.target.value;
-    adPrice.placeholder = MIN_RENT_PRICE.evt.target.value;
-    console.log(adPrice.min);
-  }
-}
-adType.addEventListener('change', onPriseChange);*/
