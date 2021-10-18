@@ -82,11 +82,9 @@ const onNumberRoomChange = () => {
     adGuestsNumber.setCustomValidity('Выберите верное количество гостей или комнат');
   } else {
     adGuestsNumber.setCustomValidity('');
-    adRoomsNumber.setCustomValidity('');
   }
 
   adGuestsNumber.reportValidity();
-  adRoomsNumber.reportValidity();
 };
 
 // Общая функция проверки валидности
