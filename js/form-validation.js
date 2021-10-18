@@ -2,11 +2,11 @@ const MIN_AD_LENGTH = 30;
 const MAX_AD_LENGTH = 100;
 
 const MIN_RENT_PRICE = {
-  bungalow: 0,
-  flat: 1000,
-  hotel: 3000,
-  house: 5000,
-  palace: 10000,
+  'Бунгало': 0,
+  'Квартира': 1000,
+  'Отель': 3000,
+  'Дом': 5000,
+  'Дворец': 10000,
 };
 
 const MATCHING_OF_ROOMS_AND_GUESTS = {
@@ -25,7 +25,6 @@ const adTimeOut = adForm.querySelector('#timeout');
 const adRoomsNumber = adForm.querySelector('#room_number');
 const adGuestsNumber = adForm.querySelector('#capacity');
 
-const adPriceMin = MIN_RENT_PRICE[adType.value];
 const adPriceMax = Number(adPrice.getAttribute('max'));
 
 // Проверка валидности заголовка
@@ -44,24 +43,29 @@ const onChangeTitle = () => {
 };
 
 // Присвоение минимальной цены в зависимости от типа жилья
-const onChangeDwelling = () => {
-  adPrice.placeholder = adPriceMin;
-  adPrice.min = adPriceMin;
-
+const onChangeDwelling = (evt) => {
+  if (evt.target === adType) {
+    adPrice.placeholder = MIN_RENT_PRICE[adType.value];
+    adPrice.min = MIN_RENT_PRICE[adType.value];
+  }
 };
 onChangeDwelling();
+
 // Проверка валидности цены
 const onChangePrice = () => {
-  const currentPrice = adPrice.value;
+  const adPriceMin = Number(adPrice.getAttribute('min'));
+  const currentPrice = Number(adPrice.value);
+
   if (currentPrice > adPriceMax) {
-    adPrice.setCustomValidity(`Цена должна быть не более ${adPriceMax}`);
+    adPrice.setCustomValidity(`Цена должна быть не более ${adPriceMax.toLocaleString()}`);
   } else if (currentPrice < adPriceMin) {
-    adPrice.setCustomValidity(`Цена должна быть не менее ${adPriceMin}`);
+    adPrice.setCustomValidity(`Цена должна быть не менее ${adPriceMin.toLocaleString()}`);
   }
 
   adPrice.reportValidity();
 };
 onChangePrice();
+
 //Установка соответствия времени въезда и выезда
 const onChangeTime = (evt) => {
   if (evt.target === adTimeIn) {
