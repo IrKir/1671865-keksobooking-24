@@ -2,11 +2,11 @@ const MIN_AD_LENGTH = 30;
 const MAX_AD_LENGTH = 100;
 
 const MIN_RENT_PRICE = {
-  'Бунгало': 0,
-  'Квартира': 1000,
-  'Отель': 3000,
-  'Дом': 5000,
-  'Дворец': 10000,
+  bungalow: 0,
+  flat: 1000,
+  hotel: 3000,
+  house: 5000,
+  palace: 10000,
 };
 
 const MATCHING_OF_ROOMS_AND_GUESTS = {
@@ -43,11 +43,9 @@ const onChangeTitle = () => {
 };
 
 // Присвоение минимальной цены в зависимости от типа жилья
-const onChangeDwelling = (evt) => {
-  if (evt.target === adType) {
-    adPrice.placeholder = MIN_RENT_PRICE[adType.value];
-    adPrice.min = MIN_RENT_PRICE[adType.value];
-  }
+const onChangeDwelling = () => {
+  adPrice.placeholder = MIN_RENT_PRICE[adType.value];
+  adPrice.min = MIN_RENT_PRICE[adType.value];
 };
 onChangeDwelling();
 
