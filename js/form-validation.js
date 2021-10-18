@@ -28,14 +28,13 @@ const adGuestsNumber = adForm.querySelector('#capacity');
 const adPriceMin = MIN_RENT_PRICE[adType.value];
 const adPriceMax = adPrice.getAttribute('max');
 
-
 // Проверка валидности заголовка
 const onChangeTitle = () => {
   const valueLength = adTitle.value.length;
 
   if (valueLength < MIN_AD_LENGTH) {
     adTitle.setCustomValidity(`Ещё ${  MIN_AD_LENGTH - valueLength } симв.`);
-  } else if (valueLength < MAX_AD_LENGTH) {
+  } else if (valueLength > MAX_AD_LENGTH) {
     adTitle.setCustomValidity(`Удалите лишние ${  valueLength - MAX_AD_LENGTH } симв.`);
   } else {
     adTitle.setCustomValidity('');
@@ -48,18 +47,21 @@ const onChangeTitle = () => {
 const onChangeDwelling = () => {
   adPrice.placeholder = adPriceMin;
   adPrice.min = adPriceMin;
+  console.log(adPriceMin);
 };
-
+onChangeDwelling();
 // Проверка валидности цены
 const onChangePrice = () => {
   const currentPrice = adPrice.value;
   if (currentPrice > adPriceMax) {
     adPrice.setCustomValidity(`Цена должна быть не более ${adPriceMax}`);
-  } else if (currentPrice < adPriceMin) {(   `Цена должна быть не менее ${adPriceMin}`);
+  } else if (currentPrice < adPriceMin) {
+    adPrice.setCustomValidity(`Цена должна быть не менее ${adPriceMin}`);
   }
+
+  adPrice.reportValidity();
 };
 onChangePrice();
-
 //Установка соответствия времени въезда и выезда
 const onChangeTime = (evt) => {
   if (evt.target === adTimeIn) {
@@ -69,7 +71,6 @@ const onChangeTime = (evt) => {
     adTimeIn.value = adTimeOut.value;
   }
 };
-
 
 //Проверка валидности гостей-комнат
 const checkMatchingRoomsAndGuests = () => {
