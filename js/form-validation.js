@@ -47,7 +47,6 @@ const onChangeTitle = () => {
 const onChangeDwelling = () => {
   adPrice.placeholder = adPriceMin;
   adPrice.min = adPriceMin;
-  console.log(adPriceMin);
 };
 onChangeDwelling();
 // Проверка валидности цены
