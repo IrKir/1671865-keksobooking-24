@@ -26,7 +26,7 @@ const adRoomsNumber = adForm.querySelector('#room_number');
 const adGuestsNumber = adForm.querySelector('#capacity');
 
 const adPriceMin = MIN_RENT_PRICE[adType.value];
-const adPriceMax = adPrice.getAttribute('max');
+const adPriceMax = Number(adPrice.getAttribute('max'));
 
 // Проверка валидности заголовка
 const onChangeTitle = () => {
@@ -47,6 +47,7 @@ const onChangeTitle = () => {
 const onChangeDwelling = () => {
   adPrice.placeholder = adPriceMin;
   adPrice.min = adPriceMin;
+
 };
 onChangeDwelling();
 // Проверка валидности цены
