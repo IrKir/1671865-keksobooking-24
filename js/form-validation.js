@@ -24,21 +24,18 @@ const adTimeIn = adForm.querySelector('#timein');
 const adTimeOut = adForm.querySelector('#timeout');
 const adRoomsNumber = adForm.querySelector('#room_number');
 const adGuestsNumber = adForm.querySelector('#capacity');
-const inputElement = adForm.querySelector('input');
 
 const adPriceMin = MIN_RENT_PRICE[adType.value];
 const adPriceMax = adPrice.getAttribute('max');
 
-//Проверка валидности поля input
-
 
 // Проверка валидности заголовка
 const onChangeTitle = () => {
-  const valueLength = adTitle.value.lenght;
+  const valueLength = adTitle.value.length;
 
   if (valueLength < MIN_AD_LENGTH) {
     adTitle.setCustomValidity(`Ещё ${  MIN_AD_LENGTH - valueLength } симв.`);
-  } else if (valueLength <MAX_AD_LENGTH) {
+  } else if (valueLength < MAX_AD_LENGTH) {
     adTitle.setCustomValidity(`Удалите лишние ${  valueLength - MAX_AD_LENGTH } симв.`);
   } else {
     adTitle.setCustomValidity('');
@@ -46,14 +43,12 @@ const onChangeTitle = () => {
 
   adTitle.reportValidity();
 };
-onChangeTitle();
 
 // Присвоение минимальной цены в зависимости от типа жилья
 const onChangeDwelling = () => {
   adPrice.placeholder = adPriceMin;
   adPrice.min = adPriceMin;
 };
-onChangeDwelling();
 
 // Проверка валидности цены
 const onChangePrice = () => {
@@ -74,7 +69,7 @@ const onChangeTime = (evt) => {
     adTimeIn.value = adTimeOut.value;
   }
 };
-onChangeTime();
+
 
 //Проверка валидности гостей-комнат
 const checkMatchingRoomsAndGuests = () => {
@@ -90,9 +85,9 @@ const checkMatchingRoomsAndGuests = () => {
   adGuestsNumber.reportValidity();
   adRoomsNumber.reportValidity();
 };
-checkMatchingRoomsAndGuests();
 
-/* Общая функция проверки валидности
+
+// Общая функция проверки валидности
 const adFormValidation = () => {
   adTitle.addEventListener('input', onChangeTitle);
   adPrice.addEventListener('input', onChangePrice);
@@ -103,7 +98,7 @@ const adFormValidation = () => {
   adGuestsNumber.addEventListener('change', checkMatchingRoomsAndGuests);
 };
 
-adFormValidation();*/
+adFormValidation();
 
 /*function onPriseChange (evt) {
   if (evt.target.matches('select.options[select.selectedIndex]')) {
