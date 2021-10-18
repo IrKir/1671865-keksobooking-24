@@ -58,6 +58,8 @@ const onChangePrice = () => {
     adPrice.setCustomValidity(`Цена должна быть не более ${adPriceMax.toLocaleString()}`);
   } else if (currentPrice < adPriceMin) {
     adPrice.setCustomValidity(`Цена должна быть не менее ${adPriceMin.toLocaleString()}`);
+  } else {
+    adPrice.setCustomValidity('');
   }
 
   adPrice.reportValidity();
