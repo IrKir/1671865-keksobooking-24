@@ -13,7 +13,6 @@ const getFormActive = () => {
     formFilterField.removeAttribute('disabled', '');
   });
 };
-getFormActive();
 
 const getFormInactive = () => {
   adForm.classList.add('.ad-form--disabled');
@@ -27,3 +26,4 @@ const getFormInactive = () => {
 };
 
 getFormInactive();
+getFormActive();
