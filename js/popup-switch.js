@@ -27,5 +27,4 @@ const getFormActive = () => {
     formFilterField.removeAttribute('disabled', '');
   });
 };
-
 getFormActive();
