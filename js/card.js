@@ -1,4 +1,4 @@
-import {finalArray} from './data.js';
+/*import {finalArray} from './data.js';
 
 const HOUSING_TYPE = {
   flat: 'Квартира',
@@ -53,4 +53,4 @@ const getMarkupSimilarElements = () => {
   popupList.appendChild(popupClone);
 };
 
-getMarkupSimilarElements();
+getMarkupSimilarElements();*/
