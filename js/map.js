@@ -38,14 +38,14 @@ const mainPinMarker = L.marker(
 
 mainPinMarker.addTo(map);
 
-const createMarker = () => {
+const createMarker = finalArray.map((element) => {
   const icon = L.icon({
     iconUrl: '../img/pin.svg',
     iconSize: [40, 40],
     iconAnchor: [20, 40],
   });
-  const lat = Number(finalArray[0].location.lat);
-  const lng = Number(finalArray[0].location.lng);
+  const lat = Number(element.location.lat);
+  const lng = Number(element.location.lng);
   const marker = L.marker({
     lat,
     lng,
@@ -55,8 +55,8 @@ const createMarker = () => {
   });
   marker
     .addTo(map)
-    .bindPopup(createCustomPopup(finalArray[0]));
-};
+    .bindPopup(createCustomPopup(element));
+});
 createMarker();
 
 document.querySelector('#address').value = '35.6895, 139.692';
