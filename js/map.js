@@ -1,5 +1,6 @@
 import {activateForm, deactivateForm} from './popup-switch.js';
 import {finalArray} from './data.js';
+import {createCustomPopup} from './card.js';
 
 deactivateForm();
 
@@ -35,33 +36,31 @@ const mainPinMarker = L.marker(
   },
 );
 
-const getMapMarkers = () => {
-  const title = finalArray[0].offer.title;
-  const icon = L.icon({
-    iconUrl: '../img/pin.svg',
-    iconSize: [40, 40],
-    iconAnchor: [20, 40],
-  });
-  const lat = Number(finalArray[0].location.lat);
-  const lng = Number(finalArray[0].location.lng);
-  const marker = L.marker({
-    lat,
-    lng,
-  },
-  {
-    icon,
-  });
-  marker
-    .addTo(map)
-    .bindPopup(title);
-};
-getMapMarkers();
-
-
 mainPinMarker.addTo(map);
-mainPinMarker.on('moveend', (evt) => {
-  (evt.target.getLatLng());
+
+const icon = L.icon({
+  iconUrl: '../img/pin.svg',
+  iconSize: [40, 40],
+  iconAnchor: [20, 40],
 });
+const lat = Number(finalArray[0].location.lat);
+const lng = Number(finalArray[0].location.lng);
+const marker = L.marker({
+  lat,
+  lng,
+},
+{
+  icon,
+});
+marker
+  .addTo(map)
+  .bindPopup(createCustomPopup(finalArray[0]));
+
+const getMainMarkerAddress = () => mainPinMarker.on('moveend', (evt) => {
+  const mainMarkerAddress = (evt.target.getLatLng());
+  console.log(mainMarkerAddress);
+});
+getMainMarkerAddress();
 
 /* Вернуть метке изначальные координаты
 const resetButton = document.querySelector('#reset');

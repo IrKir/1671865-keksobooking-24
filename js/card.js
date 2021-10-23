@@ -1,4 +1,4 @@
-/*import {finalArray} from './data.js';
+import {finalArray} from './data.js';
 
 const HOUSING_TYPE = {
   flat: 'Квартира',
@@ -8,11 +8,9 @@ const HOUSING_TYPE = {
   hotel: 'Отель',
 };
 
-const popupList = document.querySelector('#map-canvas');
-const cardTemplate = document.querySelector('#card').content;
-const popup = cardTemplate.querySelector('.popup');
-
-const getMarkupSimilarElements = () => {
+const createCustomPopup = () => {
+  const cardTemplate = document.querySelector('#card').content;
+  const popup = cardTemplate.querySelector('.popup');
   const popupClone = popup.cloneNode(true);
   popupClone.querySelector('.popup__title').textContent = finalArray[0].offer.title;
   popupClone.querySelector('.popup__text--address').textContent = finalArray[0].offer.address;
@@ -50,7 +48,8 @@ const getMarkupSimilarElements = () => {
     popupPhotos.appendChild(img);
   });
   popupClone.querySelector('.popup__avatar').src = finalArray[0].author.avatar;
-  popupList.appendChild(popupClone);
+
+  return popupClone;
 };
 
-getMarkupSimilarElements();*/
+export {createCustomPopup};
