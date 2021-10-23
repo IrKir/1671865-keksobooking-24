@@ -13,7 +13,7 @@ const map = L.map('map-canvas')
     lng: 139.692,
   }, 10);
 
-const mapTitle = L.tileLayer(
+L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
   {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'},
@@ -38,27 +38,31 @@ const mainPinMarker = L.marker(
 
 mainPinMarker.addTo(map);
 
-const icon = L.icon({
-  iconUrl: '../img/pin.svg',
-  iconSize: [40, 40],
-  iconAnchor: [20, 40],
-});
-const lat = Number(finalArray[0].location.lat);
-const lng = Number(finalArray[0].location.lng);
-const marker = L.marker({
-  lat,
-  lng,
-},
-{
-  icon,
-});
-marker
-  .addTo(map)
-  .bindPopup(createCustomPopup(finalArray[0]));
+const createMarker = () => {
+  const icon = L.icon({
+    iconUrl: '../img/pin.svg',
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
+  });
+  const lat = Number(finalArray[0].location.lat);
+  const lng = Number(finalArray[0].location.lng);
+  const marker = L.marker({
+    lat,
+    lng,
+  },
+  {
+    icon,
+  });
+  marker
+    .addTo(map)
+    .bindPopup(createCustomPopup(finalArray[0]));
+};
+createMarker();
 
+document.querySelector('#address').value = '35.6895, 139.692';
 const getMainMarkerAddress = () => mainPinMarker.on('moveend', (evt) => {
   const mainMarkerAddress = (evt.target.getLatLng());
-  console.log(mainMarkerAddress);
+  document.querySelector('#address').value = `${mainMarkerAddress.lat.toFixed(5)}, ${mainMarkerAddress.lng.toFixed(5)}`;
 });
 getMainMarkerAddress();
 

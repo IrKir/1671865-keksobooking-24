@@ -47,6 +47,7 @@ const onChangeDwelling = () => {
   adPrice.placeholder = MIN_RENT_PRICE[adType.value];
   adPrice.min = MIN_RENT_PRICE[adType.value];
 };
+onChangeDwelling();
 
 // Проверка валидности цены
 const onChangePrice = () => {
@@ -98,4 +99,4 @@ const adFormValidation = () => {
   adGuestsNumber.addEventListener('change', onNumberRoomChange);
 };
 
-adFormValidation();
+export {onChangeDwelling, adFormValidation};
