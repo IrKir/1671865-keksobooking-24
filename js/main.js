@@ -1,5 +1,5 @@
-import {onChangeDwelling, adFormValidation} from'./form-validation.js';
+import {onDwellingChange, setAdFormValidation} from'./form-validation.js';
 import './map.js';
 
-onChangeDwelling();
-adFormValidation();
+onDwellingChange();
+setAdFormValidation();

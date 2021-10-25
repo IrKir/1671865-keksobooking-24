@@ -59,11 +59,11 @@ finalArray.map((element) => {
 });
 
 document.querySelector('#address').value = '35.6895, 139.692';
-const getMainMarkerAddress = () => mainPinMarker.on('moveend', (evt) => {
+const setMainMarkerAddress = () => mainPinMarker.on('moveend', (evt) => {
   const mainMarkerAddress = (evt.target.getLatLng());
   document.querySelector('#address').value = `${mainMarkerAddress.lat.toFixed(5)}, ${mainMarkerAddress.lng.toFixed(5)}`;
 });
-getMainMarkerAddress();
+setMainMarkerAddress();
 
 /* Вернуть метке изначальные координаты
 const resetButton = document.querySelector('#reset');

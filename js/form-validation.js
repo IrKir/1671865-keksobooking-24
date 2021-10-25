@@ -43,11 +43,11 @@ const onChangeTitle = () => {
 };
 
 // Присвоение минимальной цены в зависимости от типа жилья
-const onChangeDwelling = () => {
+const onDwellingChange = () => {
   adPrice.placeholder = MIN_RENT_PRICE[adType.value];
   adPrice.min = MIN_RENT_PRICE[adType.value];
 };
-onChangeDwelling();
+onDwellingChange();
 
 // Проверка валидности цены
 const onChangePrice = () => {
@@ -89,14 +89,14 @@ const onNumberRoomChange = () => {
 };
 
 // Общая функция проверки валидности
-const adFormValidation = () => {
+const setAdFormValidation = () => {
   adTitle.addEventListener('input', onChangeTitle);
   adPrice.addEventListener('input', onChangePrice);
-  adType.addEventListener('change', onChangeDwelling);
+  adType.addEventListener('change', onDwellingChange);
   adTimeIn.addEventListener('change', onChangeTime);
   adTimeOut.addEventListener('change', onChangeTime);
   adRoomsNumber.addEventListener('change', onNumberRoomChange);
   adGuestsNumber.addEventListener('change', onNumberRoomChange);
 };
 
-export {onChangeDwelling, adFormValidation};
+export {onDwellingChange, setAdFormValidation};
