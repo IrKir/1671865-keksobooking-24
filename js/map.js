@@ -1,4 +1,4 @@
-import {activateForm, deactivateForm} from './popup-switch.js';
+import {activateForm, deactivateForm} from './form-switch.js';
 import {finalArray} from './data.js';
 import {createCustomPopup} from './card.js';
 
