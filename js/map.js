@@ -65,6 +65,8 @@ const getMainMarkerAddress = () => mainPinMarker.on('moveend', (evt) => {
 });
 getMainMarkerAddress();
 
+export {createMarker};
+
 /* Вернуть метке изначальные координаты
 const resetButton = document.querySelector('#reset');
 resetButton.addEventListener('click', () => {
