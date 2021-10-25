@@ -1,62 +1,72 @@
-import {activateForm, deactivateForm} from './form-switch.js';
+import {activateForm} from './page-switch.js';
 import {finalArray} from './data.js';
 import {createCustomPopup} from './card.js';
 
-deactivateForm();
+let map;
+let mainPinMarker;
 
-const map = L.map('map-canvas')
-  .on('load', () => {
-    activateForm();
-  })
-  .setView({
-    lat: 35.6895,
-    lng: 139.692,
-  }, 10);
+const setMap = () => {
+  map = L.map('map-canvas')
+    .on('load', () => {
+      activateForm();
+    })
+    .setView({
+      lat: 35.6895,
 
-L.tileLayer(
-  'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-  {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'},
-).addTo(map);
+      lng: 139.692,
+    }, 10);
 
-const mainPinIcon = L.icon({
-  iconUrl: '../img/main-pin.svg',
-  iconSize: [52, 52],
-  iconAnchor: [26, 52],
-});
+  L.tileLayer(
+    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'},
+  ).addTo(map);
 
-const mainPinMarker = L.marker(
-  {
-    lat: 35.6895,
-    lng: 139.692,
-  },
-  {
-    draggable: true,
-    icon: mainPinIcon,
-  },
-);
-
-mainPinMarker.addTo(map);
-
-finalArray.map((element) => {
-  const icon = L.icon({
-    iconUrl: '../img/pin.svg',
-    iconSize: [40, 40],
-    iconAnchor: [20, 40],
+  const mainPinIcon = L.icon({
+    iconUrl: '../img/main-pin.svg',
+    iconSize: [52, 52],
+    iconAnchor: [26, 52],
   });
-  const lat = Number(element.location.lat);
-  const lng = Number(element.location.lng);
-  const marker = L.marker({
-    lat,
-    lng,
-  },
-  {
-    icon,
+
+  mainPinMarker = L.marker(
+    {
+      lat: 35.6895,
+      lng: 139.692,
+    },
+    {
+      draggable: true,
+      icon: mainPinIcon,
+    },
+  );
+
+  mainPinMarker.addTo(map);
+};
+
+setMap();
+
+const setPins = () => {
+  finalArray.map((element) => {
+    const icon = L.icon({
+      iconUrl: '../img/pin.svg',
+      iconSize: [40, 40],
+      iconAnchor: [20, 40],
+    });
+    const lat = Number(element.location.lat);
+    const lng = Number(element.location.lng);
+    const marker = L.marker({
+      lat,
+      lng,
+    },
+    {
+      icon,
+    });
+    marker
+      .addTo(map)
+      .bindPopup(createCustomPopup(element));
   });
-  marker
-    .addTo(map)
-    .bindPopup(createCustomPopup(element));
-});
+};
+
+setPins();
 
 document.querySelector('#address').value = '35.6895, 139.692';
 const setMainMarkerAddress = () => mainPinMarker.on('moveend', (evt) => {
@@ -64,6 +74,8 @@ const setMainMarkerAddress = () => mainPinMarker.on('moveend', (evt) => {
   document.querySelector('#address').value = `${mainMarkerAddress.lat.toFixed(5)}, ${mainMarkerAddress.lng.toFixed(5)}`;
 });
 setMainMarkerAddress();
+
+export {setMap, setPins};
 
 /* Вернуть метке изначальные координаты
 const resetButton = document.querySelector('#reset');
