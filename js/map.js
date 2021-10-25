@@ -38,7 +38,7 @@ const mainPinMarker = L.marker(
 
 mainPinMarker.addTo(map);
 
-finalArray.forEach((element) => {
+finalArray.map((element) => {
   const icon = L.icon({
     iconUrl: '../img/pin.svg',
     iconSize: [40, 40],
