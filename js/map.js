@@ -57,7 +57,6 @@ const createMarker = finalArray.map((element) => {
     .addTo(map)
     .bindPopup(createCustomPopup(element));
 });
-createMarker();
 
 document.querySelector('#address').value = '35.6895, 139.692';
 const getMainMarkerAddress = () => mainPinMarker.on('moveend', (evt) => {
