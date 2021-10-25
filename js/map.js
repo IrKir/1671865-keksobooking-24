@@ -38,7 +38,7 @@ const mainPinMarker = L.marker(
 
 mainPinMarker.addTo(map);
 
-const createMarker = finalArray.map((element) => {
+finalArray.forEach((element) => {
   const icon = L.icon({
     iconUrl: '../img/pin.svg',
     iconSize: [40, 40],
@@ -64,8 +64,6 @@ const getMainMarkerAddress = () => mainPinMarker.on('moveend', (evt) => {
   document.querySelector('#address').value = `${mainMarkerAddress.lat.toFixed(5)}, ${mainMarkerAddress.lng.toFixed(5)}`;
 });
 getMainMarkerAddress();
-
-export {createMarker};
 
 /* Вернуть метке изначальные координаты
 const resetButton = document.querySelector('#reset');
