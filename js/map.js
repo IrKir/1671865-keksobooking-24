@@ -1,11 +1,9 @@
-import {activateForm, deactivateForm} from './page-switch.js';
+import {activateForm} from './page-switch.js';
 import {finalArray} from './data.js';
 import {createCustomPopup} from './card.js';
 
 let map;
 let mainPinMarker;
-
-deactivateForm();
 
 const setMap = () => {
   map = L.map('map-canvas')
@@ -44,8 +42,6 @@ const setMap = () => {
   mainPinMarker.addTo(map);
 };
 
-setMap();
-
 const setPins = () => {
   finalArray.map((element) => {
     const icon = L.icon({
@@ -68,14 +64,12 @@ const setPins = () => {
   });
 };
 
-setPins();
-
 document.querySelector('#address').value = '35.6895, 139.692';
 const address = document.querySelector('#address');
 const setMainMarkerAddress = () => mainPinMarker.on('move', (evt) => {
   const mainMarkerAddress = (evt.target.getLatLng());
   address.value = `${mainMarkerAddress.lat.toFixed(5)}, ${mainMarkerAddress.lng.toFixed(5)}`;
 });
-setMainMarkerAddress();
 
-export {setMap, setPins};
+
+export {setMap, setPins, setMainMarkerAddress};

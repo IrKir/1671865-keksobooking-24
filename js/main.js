@@ -1,7 +1,11 @@
 import {onDwellingChange, setAdFormValidation} from'./form-validation.js';
-import {setMap, setPins} from './map.js';
+import {deactivateForm} from './page-switch.js';
+import {setMap, setPins, setMainMarkerAddress} from './map.js';
+
 
 onDwellingChange();
 setAdFormValidation();
+deactivateForm();
 setMap();
 setPins();
+setMainMarkerAddress();
