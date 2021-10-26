@@ -1,9 +1,11 @@
-import {activateForm} from './page-switch.js';
+import {activateForm, deactivateForm} from './page-switch.js';
 import {finalArray} from './data.js';
 import {createCustomPopup} from './card.js';
 
 let map;
 let mainPinMarker;
+
+deactivateForm();
 
 const setMap = () => {
   map = L.map('map-canvas')
@@ -69,25 +71,11 @@ const setPins = () => {
 setPins();
 
 document.querySelector('#address').value = '35.6895, 139.692';
-const setMainMarkerAddress = () => mainPinMarker.on('moveend', (evt) => {
+const address = document.querySelector('#address');
+const setMainMarkerAddress = () => mainPinMarker.on('move', (evt) => {
   const mainMarkerAddress = (evt.target.getLatLng());
-  document.querySelector('#address').value = `${mainMarkerAddress.lat.toFixed(5)}, ${mainMarkerAddress.lng.toFixed(5)}`;
+  address.value = `${mainMarkerAddress.lat.toFixed(5)}, ${mainMarkerAddress.lng.toFixed(5)}`;
 });
 setMainMarkerAddress();
 
 export {setMap, setPins};
-
-/* Вернуть метке изначальные координаты
-const resetButton = document.querySelector('#reset');
-resetButton.addEventListener('click', () => {
-  mainPinMarker.setLatLng({
-    lat: 35.6895,
-    lng: 139.692,
-  });
-});*/
-
-/*добавить возвращение к начальным значениям масштаба и центра карты
-map.setView({
-    lat: 35.6895,
-    lng: 139.692,
-  }, 10);*/
