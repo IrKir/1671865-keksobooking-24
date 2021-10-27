@@ -1,5 +1,4 @@
 import {activateForm} from './page-switch.js';
-import {finalArray} from './data.js';
 import {createCustomPopup} from './card.js';
 
 let map;
@@ -42,7 +41,7 @@ const setMap = () => {
   mainPinMarker.addTo(map);
 };
 
-const setPins = () => {
+const setPins = (finalArray) => {
   finalArray.map((element) => {
     const icon = L.icon({
       iconUrl: '../img/pin.svg',
