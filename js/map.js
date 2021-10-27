@@ -4,6 +4,8 @@ import {createCustomPopup} from './card.js';
 let map;
 let mainPinMarker;
 
+const resetButton = document.querySelector('.ad-form__reset');
+
 const setMap = () => {
   map = L.map('map-canvas')
     .on('load', () => {
@@ -39,6 +41,13 @@ const setMap = () => {
   );
 
   mainPinMarker.addTo(map);
+
+  resetButton.addEventListener('click', () => {
+    mainPinMarker.setLatLng({
+      lat: 35.6895,
+      lng: 139.692,
+    });
+  });
 };
 
 const setPins = (finalArray) => {
@@ -69,6 +78,5 @@ const setMainMarkerAddress = () => mainPinMarker.on('move', (evt) => {
   const mainMarkerAddress = (evt.target.getLatLng());
   address.value = `${mainMarkerAddress.lat.toFixed(5)}, ${mainMarkerAddress.lng.toFixed(5)}`;
 });
-
 
 export {setMap, setPins, setMainMarkerAddress};

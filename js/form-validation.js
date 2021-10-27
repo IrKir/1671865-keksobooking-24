@@ -24,7 +24,6 @@ const adTimeIn = adForm.querySelector('#timein');
 const adTimeOut = adForm.querySelector('#timeout');
 const adRoomsNumber = adForm.querySelector('#room_number');
 const adGuestsNumber = adForm.querySelector('#capacity');
-
 const adPriceMax = Number(adPrice.getAttribute('max'));
 
 const onTitleChange = () => {
