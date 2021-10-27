@@ -27,8 +27,7 @@ const adGuestsNumber = adForm.querySelector('#capacity');
 
 const adPriceMax = Number(adPrice.getAttribute('max'));
 
-// Проверка валидности заголовка
-const onChangeTitle = () => {
+const onTitleChange = () => {
   const valueLength = adTitle.value.length;
 
   if (valueLength < MIN_AD_LENGTH) {
@@ -42,15 +41,13 @@ const onChangeTitle = () => {
   adTitle.reportValidity();
 };
 
-// Присвоение минимальной цены в зависимости от типа жилья
 const onDwellingChange = () => {
   adPrice.placeholder = MIN_RENT_PRICE[adType.value];
   adPrice.min = MIN_RENT_PRICE[adType.value];
 };
 onDwellingChange();
 
-// Проверка валидности цены
-const onChangePrice = () => {
+const onPriceChange = () => {
   const adPriceMin = Number(adPrice.getAttribute('min'));
   const currentPrice = Number(adPrice.value);
 
@@ -65,8 +62,7 @@ const onChangePrice = () => {
   adPrice.reportValidity();
 };
 
-//Установка соответствия времени въезда и выезда
-const onChangeTime = (evt) => {
+const onTimeChange = (evt) => {
   if (evt.target === adTimeIn) {
     adTimeOut.value = adTimeIn.value;
   }
@@ -75,7 +71,6 @@ const onChangeTime = (evt) => {
   }
 };
 
-//Проверка валидности гостей-комнат
 const onNumberRoomChange = () => {
   const roomsNumber =  Number(adRoomsNumber.value);
   const guestsNumber = Number(adGuestsNumber.value);
@@ -88,13 +83,12 @@ const onNumberRoomChange = () => {
   adGuestsNumber.reportValidity();
 };
 
-// Общая функция проверки валидности
 const setAdFormValidation = () => {
-  adTitle.addEventListener('input', onChangeTitle);
-  adPrice.addEventListener('input', onChangePrice);
+  adTitle.addEventListener('input', onTitleChange);
+  adPrice.addEventListener('input', onPriceChange);
   adType.addEventListener('change', onDwellingChange);
-  adTimeIn.addEventListener('change', onChangeTime);
-  adTimeOut.addEventListener('change', onChangeTime);
+  adTimeIn.addEventListener('change', onTimeChange);
+  adTimeOut.addEventListener('change', onTimeChange);
   adRoomsNumber.addEventListener('change', onNumberRoomChange);
   adGuestsNumber.addEventListener('change', onNumberRoomChange);
 };
