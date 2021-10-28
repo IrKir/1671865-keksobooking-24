@@ -1,3 +1,6 @@
+import {sendData} from './api.js';
+import {onSubmitSuccess, onSubmitError} from './popup.js';
+
 const MIN_AD_LENGTH = 30;
 const MAX_AD_LENGTH = 100;
 
@@ -25,6 +28,7 @@ const adTimeOut = adForm.querySelector('#timeout');
 const adRoomsNumber = adForm.querySelector('#room_number');
 const adGuestsNumber = adForm.querySelector('#capacity');
 const adPriceMax = Number(adPrice.getAttribute('max'));
+const errorButton = document.querySelector('.error__button');
 
 const onTitleChange = () => {
   const valueLength = adTitle.value.length;
@@ -91,5 +95,24 @@ const setAdFormValidation = () => {
   adRoomsNumber.addEventListener('change', onNumberRoomChange);
   adGuestsNumber.addEventListener('change', onNumberRoomChange);
 };
+
+const setUserFormSubmit = () => {
+  adForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    const formData = new FormData(evt.target);
+    sendData(onSubmitSuccess, onSubmitError, formData);
+  });
+};
+
+const closePopup = () => {
+  errorButton.addEventListener('click', (evt) => {
+    const popup = document.querySelector('.active-popup');
+    popup.remove();
+  });
+};
+
+setUserFormSubmit();
+closePopup();
 
 export {onDwellingChange, setAdFormValidation};

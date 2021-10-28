@@ -10,29 +10,30 @@ const getData = fetch('https://24.javascript.pages.academy/keksobooking/data',
       return response.json();
     }
 
-    throw new Error(`${response.status} ${response.statusText}`);
+    throw new Error('Ошибка загрузки');
   })
   .then((advertisements) => {
     setPins(advertisements);
   })
-  .catch((err) => {
-    console.error(err);
+  .catch(() => {
+    throw new Error('Ошибка загрузки');
   });
 
 
-/*const setData = fetch('https://24.javascript.pages.academy/keksobooking/data',
-  {
-    method: 'POST',
-    body: new FormData(),
-  },
-)
-  .then((response) => response.json())
-  .then((data) => {
-    console.log('Результат', data);
-  })
-  .catch((err) => {
-    console.error(err);
-  });*/
+const sendData = (onSucces, onFail, body) => {
+  fetch('https://24.javascript.pages.academy/keksobooking ',
+    {
+      method: 'POST',
+      body,
+    })
+    .then((response) => {
+      if (response.ok) {
+        onSucces();
+      } else {
+        onFail();
+      }
+    })
+    .catch(onFail);
+};
 
-
-export {getData};
+export {getData, sendData};
