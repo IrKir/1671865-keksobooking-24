@@ -4,8 +4,6 @@ import {createCustomPopup} from './card.js';
 let map;
 let mainPinMarker;
 
-const resetButton = document.querySelector('.ad-form__reset');
-
 const setMap = () => {
   map = L.map('map-canvas')
     .on('load', () => {
@@ -44,18 +42,17 @@ const setMap = () => {
 };
 
 const resetMapAndMarker = () => {
-  resetButton.addEventListener('click', () => {
-    mainPinMarker.setLatLng({
-      lat: 35.6895,
-      lng: 139.692,
-    });
-
-    map.setView({
-      lat: 35.6895,
-      lng: 139.692,
-    }, 10);
+  mainPinMarker.setLatLng({
+    lat: 35.6895,
+    lng: 139.692,
   });
+
+  map.setView({
+    lat: 35.6895,
+    lng: 139.692,
+  }, 10);
 };
+
 
 const setPins = (finalArray) => {
   finalArray.map((element) => {
@@ -78,7 +75,6 @@ const setPins = (finalArray) => {
       .bindPopup(createCustomPopup(element));
   });
 };
-
 
 const setAddressValue = () => {
   document.querySelector('#address').value = '35.6895, 139.692';

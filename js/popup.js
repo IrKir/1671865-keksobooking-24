@@ -27,6 +27,4 @@ const onSubmitError = () => {
   buttonError.addEventListener('click', errorForm.remove);
 };
 
-onSubmitError();
-
 export {onSubmitSuccess, onSubmitError};

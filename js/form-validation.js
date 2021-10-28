@@ -29,6 +29,7 @@ const adTimeOut = adForm.querySelector('#timeout');
 const adRoomsNumber = adForm.querySelector('#room_number');
 const adGuestsNumber = adForm.querySelector('#capacity');
 const adPriceMax = Number(adPrice.getAttribute('max'));
+const buttonReset = adForm.querySelector('.ad-form__reset');
 
 const filterForm = document.querySelector('.map__filters');
 
@@ -113,6 +114,14 @@ const clearForm = () => {
   resetMapAndMarker();
 };
 
-setUserFormSubmit();
+const resetForm = () => {
+  buttonReset.addEventListener('click', clearForm);
+};
 
-export {onDwellingChange, setAdFormValidation, setUserFormSubmit, clearForm};
+export {
+  onDwellingChange,
+  setAdFormValidation,
+  setUserFormSubmit,
+  clearForm,
+  resetForm
+};
