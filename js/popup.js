@@ -23,9 +23,10 @@ const onSubmitError = () => {
   errorForm.classList.add('active-popup');
   document.body.appendChild(errorForm);
 
-  setTimeout(() => {
-    errorForm.remove();
-  }, ALERT_SHOW_TIME);
+  const buttonError = errorForm.querySelector('.error__button');
+  buttonError.addEventListener('click', errorForm.remove);
 };
+
+onSubmitError();
 
 export {onSubmitSuccess, onSubmitError};

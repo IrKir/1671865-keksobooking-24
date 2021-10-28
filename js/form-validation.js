@@ -1,5 +1,6 @@
 import {sendData} from './api.js';
 import {onSubmitSuccess, onSubmitError} from './popup.js';
+import {resetMapAndMarker} from './map.js';
 
 const MIN_AD_LENGTH = 30;
 const MAX_AD_LENGTH = 100;
@@ -28,7 +29,8 @@ const adTimeOut = adForm.querySelector('#timeout');
 const adRoomsNumber = adForm.querySelector('#room_number');
 const adGuestsNumber = adForm.querySelector('#capacity');
 const adPriceMax = Number(adPrice.getAttribute('max'));
-const errorButton = document.querySelector('.error__button');
+
+const filterForm = document.querySelector('.map__filters');
 
 const onTitleChange = () => {
   const valueLength = adTitle.value.length;
@@ -105,14 +107,12 @@ const setUserFormSubmit = () => {
   });
 };
 
-const closePopup = () => {
-  errorButton.addEventListener('click', (evt) => {
-    const popup = document.querySelector('.active-popup');
-    popup.remove();
-  });
+const clearForm = () => {
+  adForm.reset();
+  filterForm.reset();
+  resetMapAndMarker();
 };
 
 setUserFormSubmit();
-closePopup();
 
-export {onDwellingChange, setAdFormValidation};
+export {onDwellingChange, setAdFormValidation, setUserFormSubmit, clearForm};
