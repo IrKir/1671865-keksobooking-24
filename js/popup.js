@@ -1,3 +1,5 @@
+import {clearForm} from'./form-validation.js';
+
 const isEscKey = (evt) => evt.key === 'Escape' || evt.key === 'Esc';
 
 const isClickAndKeydown = (messageType) => {
@@ -18,6 +20,7 @@ const showPopupSuccess = () => {
   const success = successFormTemplate.cloneNode(true);
   document.body.appendChild(success);
   isClickAndKeydown(success);
+  clearForm();
 };
 
 const showPopupError = () => {
