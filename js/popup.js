@@ -22,9 +22,8 @@ const onSubmitError = () => {
   const errorForm = errorFormTemplate.cloneNode(true);
   errorForm.classList.add('active-popup');
   document.body.appendChild(errorForm);
-
-  const buttonError = errorForm.querySelector('.error__button');
-  buttonError.addEventListener('click', errorForm.remove);
+  errorForm.addEventListener('click', errorForm.remove);
+  document.removeEventListener('click', errorForm);
 };
 
 export {onSubmitSuccess, onSubmitError};
