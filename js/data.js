@@ -1,4 +1,4 @@
-import {getRandomPositiveInteger} from './get-random-positive-integer.js';
+/*import {getRandomPositiveInteger} from './get-random-positive-integer.js';
 import {getRandomPositiveFloat} from './get-random-positive-float.js';
 import {
   AVATAR_NUMBER,
@@ -45,4 +45,4 @@ const getElement = () => {
 };
 
 const finalArray = Array.from({length:ANNOUNCEMENT_COUNT}, getElement);
-export {finalArray};
+export {finalArray};*/

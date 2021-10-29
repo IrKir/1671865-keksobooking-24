@@ -1,5 +1,4 @@
 import {activateForm} from './page-switch.js';
-import {finalArray} from './data.js';
 import {createCustomPopup} from './card.js';
 
 let map;
@@ -42,7 +41,7 @@ const setMap = () => {
   mainPinMarker.addTo(map);
 };
 
-const setPins = () => {
+const setPins = (finalArray) => {
   finalArray.map((element) => {
     const icon = L.icon({
       iconUrl: '../img/pin.svg',
@@ -64,12 +63,25 @@ const setPins = () => {
   });
 };
 
-document.querySelector('#address').value = '35.6895, 139.692';
-const address = document.querySelector('#address');
-const setMainMarkerAddress = () => mainPinMarker.on('move', (evt) => {
-  const mainMarkerAddress = (evt.target.getLatLng());
-  address.value = `${mainMarkerAddress.lat.toFixed(5)}, ${mainMarkerAddress.lng.toFixed(5)}`;
-});
+const resetMapAndMarker = () => {
+  mainPinMarker.setLatLng({
+    lat: 35.6895,
+    lng: 139.692,
+  });
 
+  map.setView({
+    lat: 35.6895,
+    lng: 139.692,
+  }, 10);
+  map.closePopup();
+};
 
-export {setMap, setPins, setMainMarkerAddress};
+const setAddressValue = () => {
+  const address = document.querySelector('#address');
+  mainPinMarker.on('move', (evt) => {
+    const mainMarkerAddress = (evt.target.getLatLng());
+    address.value = `${mainMarkerAddress.lat.toFixed(5)}, ${mainMarkerAddress.lng.toFixed(5)}`;
+  });
+};
+
+export {setMap, setPins, setAddressValue, resetMapAndMarker};

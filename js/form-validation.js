@@ -1,3 +1,7 @@
+import {sendData} from './api.js';
+import {showPopupSuccess, showPopupError} from './popup.js';
+import {resetMapAndMarker} from './map.js';
+
 const MIN_AD_LENGTH = 30;
 const MAX_AD_LENGTH = 100;
 
@@ -24,11 +28,12 @@ const adTimeIn = adForm.querySelector('#timein');
 const adTimeOut = adForm.querySelector('#timeout');
 const adRoomsNumber = adForm.querySelector('#room_number');
 const adGuestsNumber = adForm.querySelector('#capacity');
-
 const adPriceMax = Number(adPrice.getAttribute('max'));
+const buttonReset = adForm.querySelector('.ad-form__reset');
 
-// Проверка валидности заголовка
-const onChangeTitle = () => {
+const filterForm = document.querySelector('.map__filters');
+
+const onTitleChange = () => {
   const valueLength = adTitle.value.length;
 
   if (valueLength < MIN_AD_LENGTH) {
@@ -42,15 +47,13 @@ const onChangeTitle = () => {
   adTitle.reportValidity();
 };
 
-// Присвоение минимальной цены в зависимости от типа жилья
 const onDwellingChange = () => {
   adPrice.placeholder = MIN_RENT_PRICE[adType.value];
   adPrice.min = MIN_RENT_PRICE[adType.value];
 };
 onDwellingChange();
 
-// Проверка валидности цены
-const onChangePrice = () => {
+const onPriceChange = () => {
   const adPriceMin = Number(adPrice.getAttribute('min'));
   const currentPrice = Number(adPrice.value);
 
@@ -65,8 +68,7 @@ const onChangePrice = () => {
   adPrice.reportValidity();
 };
 
-//Установка соответствия времени въезда и выезда
-const onChangeTime = (evt) => {
+const onTimeChange = (evt) => {
   if (evt.target === adTimeIn) {
     adTimeOut.value = adTimeIn.value;
   }
@@ -75,7 +77,6 @@ const onChangeTime = (evt) => {
   }
 };
 
-//Проверка валидности гостей-комнат
 const onNumberRoomChange = () => {
   const roomsNumber =  Number(adRoomsNumber.value);
   const guestsNumber = Number(adGuestsNumber.value);
@@ -88,15 +89,39 @@ const onNumberRoomChange = () => {
   adGuestsNumber.reportValidity();
 };
 
-// Общая функция проверки валидности
 const setAdFormValidation = () => {
-  adTitle.addEventListener('input', onChangeTitle);
-  adPrice.addEventListener('input', onChangePrice);
+  adTitle.addEventListener('input', onTitleChange);
+  adPrice.addEventListener('input', onPriceChange);
   adType.addEventListener('change', onDwellingChange);
-  adTimeIn.addEventListener('change', onChangeTime);
-  adTimeOut.addEventListener('change', onChangeTime);
+  adTimeIn.addEventListener('change', onTimeChange);
+  adTimeOut.addEventListener('change', onTimeChange);
   adRoomsNumber.addEventListener('change', onNumberRoomChange);
   adGuestsNumber.addEventListener('change', onNumberRoomChange);
 };
 
-export {onDwellingChange, setAdFormValidation};
+const setUserFormSubmit = () => {
+  adForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    const formData = new FormData(evt.target);
+    sendData(showPopupSuccess, showPopupError, formData);
+  });
+};
+
+const clearForm = () => {
+  adForm.reset();
+  filterForm.reset();
+  resetMapAndMarker();
+};
+
+const resetForm = () => {
+  buttonReset.addEventListener('click', clearForm);
+};
+
+export {
+  onDwellingChange,
+  setAdFormValidation,
+  setUserFormSubmit,
+  clearForm,
+  resetForm
+};
