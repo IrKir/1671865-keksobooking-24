@@ -1,5 +1,5 @@
 import {sendData} from './api.js';
-import {onSubmitSuccess, onSubmitError} from './popup.js';
+import {showPopupSuccess, showPopupError} from './popup.js';
 import {resetMapAndMarker} from './map.js';
 
 const MIN_AD_LENGTH = 30;
@@ -104,7 +104,7 @@ const setUserFormSubmit = () => {
     evt.preventDefault();
 
     const formData = new FormData(evt.target);
-    sendData(onSubmitSuccess, onSubmitError, formData);
+    sendData(showPopupSuccess, showPopupError, formData);
   });
 };
 
