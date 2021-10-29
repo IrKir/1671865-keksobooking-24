@@ -23,7 +23,6 @@ const onSubmitError = () => {
   errorForm.classList.add('active-popup');
   document.body.appendChild(errorForm);
   errorForm.addEventListener('click', errorForm.remove);
-  document.removeEventListener('click', errorForm);
 };
 
 export {onSubmitSuccess, onSubmitError};

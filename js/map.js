@@ -41,19 +41,6 @@ const setMap = () => {
   mainPinMarker.addTo(map);
 };
 
-const resetMapAndMarker = () => {
-  mainPinMarker.setLatLng({
-    lat: 35.6895,
-    lng: 139.692,
-  });
-
-  map.setView({
-    lat: 35.6895,
-    lng: 139.692,
-  }, 10);
-};
-
-
 const setPins = (finalArray) => {
   finalArray.map((element) => {
     const icon = L.icon({
@@ -74,6 +61,19 @@ const setPins = (finalArray) => {
       .addTo(map)
       .bindPopup(createCustomPopup(element));
   });
+};
+
+const resetMapAndMarker = () => {
+  mainPinMarker.setLatLng({
+    lat: 35.6895,
+    lng: 139.692,
+  });
+
+  map.setView({
+    lat: 35.6895,
+    lng: 139.692,
+  }, 10);
+  map.closePopup();
 };
 
 const setAddressValue = () => {

@@ -19,7 +19,6 @@ const getData = fetch('https://24.javascript.pages.academy/keksobooking/data',
     throw new Error('Ошибка загрузки');
   });
 
-
 const sendData = (onSucces, onFail, body) => {
   fetch('https://24.javascript.pages.academy/keksobooking ',
     {
