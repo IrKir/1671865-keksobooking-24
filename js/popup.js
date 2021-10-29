@@ -14,6 +14,8 @@ const onSubmitSuccess = () => {
   }, ALERT_SHOW_TIME);
 };
 
+const isEscKey = (evt) => evt.key === 'Escape' || evt.key === 'Esc';
+
 const onSubmitError = () => {
   const errorFormTemplate = document.querySelector('#error')
     .content
@@ -22,7 +24,14 @@ const onSubmitError = () => {
   const errorForm = errorFormTemplate.cloneNode(true);
   errorForm.classList.add('active-popup');
   document.body.appendChild(errorForm);
-  errorForm.addEventListener('click', errorForm.remove);
+  errorForm.addEventListener('click', () => {
+    errorForm.remove();
+  } );
+  document.addEventListener('keydown', (evt) => {
+    if(isEscKey(evt)) {
+      errorForm.remove();
+    }
+  });
 };
 
 export {onSubmitSuccess, onSubmitError};

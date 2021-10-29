@@ -77,7 +77,6 @@ const resetMapAndMarker = () => {
 };
 
 const setAddressValue = () => {
-  document.querySelector('#address').value = '35.6895, 139.692';
   const address = document.querySelector('#address');
   mainPinMarker.on('move', (evt) => {
     const mainMarkerAddress = (evt.target.getLatLng());
