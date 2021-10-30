@@ -115,7 +115,9 @@ const clearForm = () => {
 };
 
 const resetForm = () => {
-  buttonReset.addEventListener('click', clearForm);
+  buttonReset.addEventListener('click', () => {
+    clearForm();
+  }, {once: true});
 };
 
 export {
