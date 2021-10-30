@@ -3,6 +3,7 @@ import {deactivateForm} from './page-switch.js';
 import {setMap, setAddressValue} from './map.js';
 import './api.js';
 import './popup.js';
+import './filter.js';
 
 onDwellingChange();
 setAdFormValidation();
