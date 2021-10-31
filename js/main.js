@@ -1,9 +1,9 @@
 import {onDwellingChange, setAdFormValidation, setUserFormSubmit, resetForm} from'./form-validation.js';
 import {deactivateForm} from './page-switch.js';
-import {setMap, setAddressValue} from './map.js';
-import './api.js';
+import {setMap, setAddressValue, setPins} from './map.js';
+import {getData} from './api.js';
 import './popup.js';
-import './filter.js';
+import {setFilterChangeHandler} from './filter.js';
 
 onDwellingChange();
 setAdFormValidation();
@@ -12,5 +12,7 @@ setMap();
 setAddressValue();
 setUserFormSubmit();
 resetForm();
-
-
+getData().then((response) => {
+  setPins(response);
+  setFilterChangeHandler(response);
+});

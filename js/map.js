@@ -3,6 +3,7 @@ import {createCustomPopup} from './card.js';
 
 let map;
 let mainPinMarker;
+let markersLayer = L.layerGroup();
 
 const setMap = () => {
   map = L.map('map-canvas')
@@ -58,9 +59,14 @@ const setPins = (finalArray) => {
       icon,
     });
     marker
-      .addTo(map)
+      .addTo(markersLayer)
       .bindPopup(createCustomPopup(element));
   });
+  markersLayer.addTo(map);
+};
+
+const removePins = () => {
+  markersLayer.clearLayers();
 };
 
 const resetMapAndMarker = () => {
@@ -84,4 +90,4 @@ const setAddressValue = () => {
   });
 };
 
-export {setMap, setPins, setAddressValue, resetMapAndMarker};
+export {setMap, setPins, setAddressValue, resetMapAndMarker, removePins};

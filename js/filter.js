@@ -1,9 +1,8 @@
+//const featuresInputs = filterForm.querySelectorAll('[type="checkbox"]');
 
-const filterForm = document.querySelector('.map__filters');
-const mapFilters = filterForm.querySelectorAll('.map__filter');
-const featuresInput = filterForm.querySelectorAll('[type="checkbox"]');
+/*
 
-const getFilterData = () => {
+const setFilterData = () => {
   const housingSelect = filterForm.querySelector('#housing-type').options;
   const housingType = housingSelect[housingSelect.selectedIndex].text;
 
@@ -19,13 +18,49 @@ const getFilterData = () => {
   console.log(housingType, housingPrice, housingRooms, housingGuests);
 };
 
-getFilterData();
-
-const get = () => {
+const featuresNewArray =[];
+const setFilterForm = () => {
   mapFilters.forEach((element) => {
-    element.addEventListener('change', getFilterData);
+    element.addEventListener('change', setFilterData);
+  });
+  featuresInputs.forEach((featuresInput) => {
+    featuresInput.addEventListener('input', () => {
+      if (featuresInput === 'checked') {
+        featuresNewArray.push(featuresInput);
+        console.log(featuresNewArray);
+      }
+    });
   });
 };
-get();
+setFilterForm();*/
 
+import {removePins, setPins} from './map.js';
 
+const filterForm = document.querySelector('.map__filters');
+const mapFilter = filterForm.querySelector('.map__filter');
+const housingSelect = filterForm.querySelector('#housing-type');
+const roomsSelect = filterForm.querySelector('#housing-rooms');
+
+const checkType = (element) => {
+  if (housingSelect.value === 'any') {
+    return true;
+  }
+  return element.offer.type === housingSelect.value;
+};
+
+const checkNumberRooms = (element) => {
+  if (roomsSelect.value === 'any') {
+    return true;
+  }
+  return element.offer.rooms === +roomsSelect.value;
+};
+
+const setFilterChangeHandler = (offersArray) => {
+  filterForm.addEventListener('change', () => {
+    const result = offersArray.filter((offer) => checkType(offer) && checkNumberRooms(offer));
+    removePins();
+    setPins(result);
+  });
+};
+
+export {setFilterChangeHandler};
