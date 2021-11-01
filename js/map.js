@@ -3,7 +3,7 @@ import {createCustomPopup} from './card.js';
 
 let map;
 let mainPinMarker;
-let markersLayer = L.layerGroup();
+const markersLayer = L.layerGroup();
 
 const setMap = () => {
   map = L.map('map-canvas')
