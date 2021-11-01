@@ -37,9 +37,10 @@ setFilterForm();*/
 import {removePins, setPins} from './map.js';
 
 const filterForm = document.querySelector('.map__filters');
-const mapFilter = filterForm.querySelector('.map__filter');
 const housingSelect = filterForm.querySelector('#housing-type');
+const priceSelect = filterForm.querySelector('#housing-price');
 const roomsSelect = filterForm.querySelector('#housing-rooms');
+const guestsSelect = filterForm.querySelector('#housing-guests');
 
 const checkType = (element) => {
   if (housingSelect.value === 'any') {
@@ -55,9 +56,28 @@ const checkNumberRooms = (element) => {
   return element.offer.rooms === +roomsSelect.value;
 };
 
+const checkPrice = (element) => {
+  if (priceSelect.value === 'any') {
+    return true;
+  } else if (priceSelect.value === 'low') {
+    return element.offer.price <= 10000;
+  } else if (priceSelect.value === 'middle') {
+    return element.offer.price > 10000 && element.offer.price <= 50000;
+  } else {
+    return element.offer.price > 50000;
+  }
+};
+
+const checkGuests = (element) => {
+  if (guestsSelect.value ==='any') {
+    return true;
+  }
+  return element.offer.guests === +guestsSelect.value;
+};
+
 const setFilterChangeHandler = (offersArray) => {
   filterForm.addEventListener('change', () => {
-    const result = offersArray.filter((offer) => checkType(offer) && checkNumberRooms(offer));
+    const result = offersArray.filter((offer) => checkType(offer) && checkNumberRooms(offer)  && checkGuests(offer) && checkPrice(offer));
     removePins();
     setPins(result);
   });
