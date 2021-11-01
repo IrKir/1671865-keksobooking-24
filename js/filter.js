@@ -1,42 +1,12 @@
-//const featuresInputs = filterForm.querySelectorAll('[type="checkbox"]');
-
-/*
-
-const setFilterData = () => {
-  const housingSelect = filterForm.querySelector('#housing-type').options;
-  const housingType = housingSelect[housingSelect.selectedIndex].text;
-
-  const priceSelect = filterForm.querySelector('#housing-price').options;
-  const housingPrice = priceSelect[priceSelect.selectedIndex].text;
-
-  const roomsSelect = filterForm.querySelector('#housing-rooms').options;
-  const housingRooms = roomsSelect[roomsSelect.selectedIndex].text;
-
-  const guestsSelect = filterForm.querySelector('#housing-guests').options;
-  const housingGuests = guestsSelect[guestsSelect.selectedIndex].text;
-
-  console.log(housingType, housingPrice, housingRooms, housingGuests);
-};
-
-const featuresNewArray =[];
-const setFilterForm = () => {
-  mapFilters.forEach((element) => {
-    element.addEventListener('change', setFilterData);
-  });
-  featuresInputs.forEach((featuresInput) => {
-    featuresInput.addEventListener('input', () => {
-      if (featuresInput === 'checked') {
-        featuresNewArray.push(featuresInput);
-        console.log(featuresNewArray);
-      }
-    });
-  });
-};
-setFilterForm();*/
-
 import { removePins, setPins } from './map.js';
 
 const RERENDER_DELAY = 500;
+const ELEMENTS_QUANTITY = 10;
+const RANGE = {
+  type:'any',
+  pricelow: 'low',
+  pricemiddle: 'middle',
+};
 
 const filterForm = document.querySelector('.map__filters');
 const housingSelect = filterForm.querySelector('#housing-type');
@@ -55,25 +25,25 @@ const checkFeatures = (element) => {
 };
 
 const checkType = (element) => {
-  if (housingSelect.value === 'any') {
+  if (housingSelect.value === RANGE.type) {
     return true;
   }
   return element.offer.type === housingSelect.value;
 };
 
 const checkNumberRooms = (element) => {
-  if (roomsSelect.value === 'any') {
+  if (roomsSelect.value === RANGE.type) {
     return true;
   }
   return element.offer.rooms === +roomsSelect.value;
 };
 
 const checkPrice = (element) => {
-  if (priceSelect.value === 'any') {
+  if (priceSelect.value === RANGE.type) {
     return true;
-  } else if (priceSelect.value === 'low') {
+  } else if (priceSelect.value === RANGE.pricelow) {
     return element.offer.price <= 10000;
-  } else if (priceSelect.value === 'middle') {
+  } else if (priceSelect.value === RANGE.pricemiddle) {
     return element.offer.price > 10000 && element.offer.price <= 50000;
   } else {
     return element.offer.price > 50000;
@@ -91,7 +61,7 @@ const setFilterChangeHandler = (offersArray) => {
   filterForm.addEventListener('change', _.debounce(() => {
     const result = offersArray.filter((offer) => checkType(offer) && checkNumberRooms(offer) && checkGuests(offer) && checkPrice(offer) && checkFeatures(offer));
     removePins();
-    setPins(result.slice(0, 10));
+    setPins(result.slice(0, ELEMENTS_QUANTITY));
   },
   RERENDER_DELAY,
   ));
