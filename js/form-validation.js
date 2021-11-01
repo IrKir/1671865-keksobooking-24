@@ -1,6 +1,7 @@
 import {sendData} from './api.js';
 import {showPopupSuccess, showPopupError} from './popup.js';
 import {resetMapAndMarker} from './map.js';
+import {clearPreview} from './avatar.js';
 
 const MIN_AD_LENGTH = 30;
 const MAX_AD_LENGTH = 100;
@@ -111,13 +112,14 @@ const setUserFormSubmit = () => {
 const clearForm = () => {
   adForm.reset();
   filterForm.reset();
+  clearPreview();
   resetMapAndMarker();
 };
 
 const resetForm = () => {
   buttonReset.addEventListener('click', () => {
     clearForm();
-  }, {once: true});
+  });
 };
 
 export {

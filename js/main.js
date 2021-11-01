@@ -8,7 +8,7 @@ import './popup.js';
 import {setFilterChangeHandler} from './filter.js';
 import './avatar.js';
 
-const RERENDER_DELAY = 500;
+
 
 onDwellingChange();
 setAdFormValidation();
