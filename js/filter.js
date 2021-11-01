@@ -43,7 +43,7 @@ const roomsSelect = filterForm.querySelector('#housing-rooms');
 const guestsSelect = filterForm.querySelector('#housing-guests');
 
 
-const checkFeatures = (element) => {
+/*const checkFeatures = (element) => {
   const featuresSelect = filterForm.querySelectorAll('.map__checkbox:checked');
 
   const featuresFilter = [...featuresSelect].map((el) => el.value);
@@ -51,7 +51,7 @@ const checkFeatures = (element) => {
   console.log(featuresFilter.length, filter.length);
   return featuresFilter.length === filter.length;
 
-};
+};*/
 
 const checkType = (element) => {
   if (housingSelect.value === 'any') {
@@ -88,7 +88,7 @@ const checkGuests = (element) => {
 
 const setFilterChangeHandler = (offersArray) => {
   filterForm.addEventListener('change', () => {
-    const result = offersArray.filter((offer) => checkType(offer) && checkNumberRooms(offer) && checkGuests(offer) && checkPrice(offer) && checkFeatures(offer));
+    const result = offersArray.filter((offer) => checkType(offer) && checkNumberRooms(offer) && checkGuests(offer) && checkPrice(offer) /*&& checkFeatures(offer)*/);
     removePins();
     setPins(result);
   });
