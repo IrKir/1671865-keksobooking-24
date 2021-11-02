@@ -8,14 +8,14 @@ const Range = {
   MEAN: 'middle',
 };
 
-const filterForm = document.querySelector('.map__filters');
-const housingSelect = filterForm.querySelector('#housing-type');
-const priceSelect = filterForm.querySelector('#housing-price');
-const roomsSelect = filterForm.querySelector('#housing-rooms');
-const guestsSelect = filterForm.querySelector('#housing-guests');
+const filterSelect = document.querySelector('.map__filters');
+const housingSelect = filterSelect.querySelector('#housing-type');
+const priceSelect = filterSelect.querySelector('#housing-price');
+const roomsSelect = filterSelect.querySelector('#housing-rooms');
+const guestsSelect = filterSelect.querySelector('#housing-guests');
 
 const checkFeatures = (element) => {
-  const featuresSelect = filterForm.querySelectorAll('.map__checkbox:checked');
+  const featuresSelect = filterSelect.querySelectorAll('.map__checkbox:checked');
   if (!element.offer.features) {
     return false;
   }
@@ -58,7 +58,7 @@ const checkGuests = (element) => {
 };
 
 const setFilterChangeHandler = (offersArray) => {
-  filterForm.addEventListener('change', _.debounce(() => {
+  filterSelect.addEventListener('change', _.debounce(() => {
     const result = offersArray.filter((offer) => checkType(offer) && checkNumberRooms(offer) && checkGuests(offer) && checkPrice(offer) && checkFeatures(offer));
     removePins();
     setPins(result.slice(0, ELEMENTS_QUANTITY));

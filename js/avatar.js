@@ -2,10 +2,9 @@ const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 
 const avatarChooser = document.querySelector('.ad-form__field input[type=file]');
 const avatarPreview = document.querySelector('.setup-user-pic');
-
+const avatarPreviewClon = avatarPreview.cloneNode(true);
 const fileChooser = document.querySelector('.ad-form__upload input[type=file]');
 const filePreview = document.querySelector('.ad-form__photo');
-const avatarPreviewClon = avatarPreview.cloneNode(true);
 
 const previewAvatar = avatarChooser.addEventListener('change', () => {
   const file = avatarChooser.files[0];
