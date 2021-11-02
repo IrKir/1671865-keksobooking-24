@@ -3,7 +3,7 @@ import {deactivateForm} from './page-switch.js';
 import {setMap, setAddressValue, setPins} from './map.js';
 import {getData} from './api.js';
 import './popup.js';
-import {setFilterChangeHandler} from './filter.js';
+import {setFilterChangeHandler, ELEMENTS_QUANTITY} from './filter.js';
 import './avatar.js';
 
 onDwellingChange();
@@ -14,6 +14,6 @@ setAddressValue();
 setUserFormSubmit();
 resetForm();
 getData().then((response) => {
-  setPins(response);
+  setPins(response.slice(0, ELEMENTS_QUANTITY));
   setFilterChangeHandler(response);
 });
