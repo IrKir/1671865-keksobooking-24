@@ -28,4 +28,7 @@ const deactivateForm = () => {
   formFilterField.setAttribute('disabled', '');
 };
 
-export {activateForm, deactivateForm};
+export {
+  activateForm,
+  deactivateForm
+};

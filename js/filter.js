@@ -67,4 +67,7 @@ const setFilterChangeHandler = (offersArray) => {
   ));
 };
 
-export {setFilterChangeHandler, ELEMENTS_QUANTITY};
+export {
+  setFilterChangeHandler,
+  ELEMENTS_QUANTITY
+};

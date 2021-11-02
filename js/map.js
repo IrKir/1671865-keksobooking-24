@@ -90,4 +90,10 @@ const setAddressValue = () => {
   });
 };
 
-export {setMap, setPins, setAddressValue, resetMapAndMarker, removePins};
+export {
+  setMap,
+  setPins,
+  setAddressValue,
+  resetMapAndMarker,
+  removePins
+};

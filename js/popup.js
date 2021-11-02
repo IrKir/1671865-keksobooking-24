@@ -32,4 +32,7 @@ const showPopupError = () => {
   isClickAndKeydown(error);
 };
 
-export {showPopupSuccess, showPopupError};
+export {
+  showPopupSuccess,
+  showPopupError
+};
