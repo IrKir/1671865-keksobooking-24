@@ -6,10 +6,10 @@ const HOUSING_TYPE = {
   hotel: 'Отель',
 };
 
-const checkForAvailability = (value, element) => value || element.classList.add('visually-hidden');
-
 const cardTemplate = document.querySelector('#card').content;
 const popup = cardTemplate.querySelector('.popup');
+
+const checkForAvailability = (value, element) => value || element.classList.add('visually-hidden');
 
 const createCustomPopup = (element) => {
   const popupClone = popup.cloneNode(true);

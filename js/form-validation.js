@@ -31,7 +31,6 @@ const adRoomsNumber = adForm.querySelector('#room_number');
 const adGuestsNumber = adForm.querySelector('#capacity');
 const adPriceMax = Number(adPrice.getAttribute('max'));
 const buttonReset = adForm.querySelector('.ad-form__reset');
-
 const filterForm = document.querySelector('.map__filters');
 
 const onTitleChange = () => {

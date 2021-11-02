@@ -7,7 +7,7 @@ const isClickAndKeydown = (messageType) => {
     messageType.remove();
   }, {once: true});
   document.addEventListener('keydown', (evt) => {
-    if(isEscKey(evt)) {
+    if (isEscKey(evt)) {
       messageType.remove();
     }
   }, {once: true});
