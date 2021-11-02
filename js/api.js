@@ -11,10 +11,6 @@ const getData = () =>
 
       throw new Error('Ошибка загрузки');
     })
-    /*.then((advertisements) => {
-      setPins(advertisements);
-      setFilterArray(advertisements);
-    })*/
     .catch(() => {
       throw new Error('Ошибка загрузки');
     });
