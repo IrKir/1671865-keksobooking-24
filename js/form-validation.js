@@ -1,10 +1,12 @@
-import {sendData} from './api.js';
+import {sendData, getData} from './api.js';
 import {showPopupSuccess, showPopupError} from './popup.js';
-import {resetMapAndMarker} from './map.js';
+import {resetMapAndMarker, setPins} from './map.js';
 import {clearPreview} from './avatar.js';
+import {setFilterChangeHandler} from './filter.js';
 
 const MIN_AD_LENGTH = 30;
 const MAX_AD_LENGTH = 100;
+const ELEMENTS_QUANTITY =10;
 
 const MIN_RENT_PRICE = {
   bungalow: 0,
@@ -119,6 +121,10 @@ const clearForm = () => {
 const resetForm = () => {
   buttonReset.addEventListener('click', () => {
     clearForm();
+    getData().then((response) => {
+      setPins(response.slice(0, ELEMENTS_QUANTITY));
+      setFilterChangeHandler(response);
+    });
   });
 };
 
