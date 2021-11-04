@@ -102,7 +102,7 @@ const setAdFormValidation = () => {
   adGuestsNumber.addEventListener('change', onNumberRoomChange);
 };
 
-const setUserFormSubmit = () => {
+const setUserFormSubmitHandler = () => {
   adForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
@@ -122,7 +122,7 @@ const clearForm = () => {
   });
 };
 
-const resetForm = () => {
+const setFormResetHandler = () => {
   buttonReset.addEventListener('click', () => {
     clearForm();
   });
@@ -131,7 +131,7 @@ const resetForm = () => {
 export {
   onDwellingChange,
   setAdFormValidation,
-  setUserFormSubmit,
+  setUserFormSubmitHandler,
   clearForm,
-  resetForm
+  setFormResetHandler
 };

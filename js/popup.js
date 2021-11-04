@@ -2,7 +2,7 @@ import {clearForm} from'./form-validation.js';
 
 const isEscKey = (evt) => evt.key === 'Escape' || evt.key === 'Esc';
 
-const isClickAndKeydown = (messageType) => {
+const setPopupHandlers = (messageType) => {
   messageType.addEventListener('click', () => {
     messageType.remove();
   }, {once: true});
@@ -19,7 +19,7 @@ const showPopupSuccess = () => {
     .querySelector('.success');
   const success = successFormTemplate.cloneNode(true);
   document.body.appendChild(success);
-  isClickAndKeydown(success);
+  setPopupHandlers(success);
   clearForm();
 };
 
@@ -29,7 +29,7 @@ const showPopupError = () => {
     .querySelector('.error');
   const error = errorFormTemplate.cloneNode(true);
   document.body.appendChild(error);
-  isClickAndKeydown(error);
+  setPopupHandlers(error);
 };
 
 export {

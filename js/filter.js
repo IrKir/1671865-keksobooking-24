@@ -19,9 +19,9 @@ const checkFeatures = (element) => {
   if (!element.offer.features) {
     return false;
   }
-  const featuresFilter = [...featuresSelect].map((el) => el.value);
-  const filter = featuresFilter.filter((i) => element.offer.features.includes(i));
-  return featuresFilter.length === filter.length;
+  const checkedFeatures = [...featuresSelect].map((el) => el.value);
+  const filters = checkedFeatures.filter((i) => element.offer.features.includes(i));
+  return checkedFeatures.length === filters.length;
 };
 
 const checkType = (element) => {

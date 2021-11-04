@@ -6,7 +6,7 @@ const avatarPreviewClon = avatarPreview.cloneNode(true);
 const fileChooser = document.querySelector('.ad-form__upload input[type=file]');
 const filePreview = document.querySelector('.ad-form__photo');
 
-const previewAvatar = avatarChooser.addEventListener('change', () => {
+const showPreviewAvatar = avatarChooser.addEventListener('change', () => {
   const file = avatarChooser.files[0];
   const fileName = file.name.toLowerCase();
   const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
@@ -16,7 +16,7 @@ const previewAvatar = avatarChooser.addEventListener('change', () => {
   }
 });
 
-const previewPhoto = fileChooser.addEventListener('change', () => {
+const showPreviewPhoto = fileChooser.addEventListener('change', () => {
   const file = fileChooser.files[0];
   const fileName = file.name.toLowerCase();
   const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
@@ -34,7 +34,7 @@ const clearPreview = () => {
 };
 
 export {
-  previewAvatar,
-  previewPhoto,
+  showPreviewAvatar,
+  showPreviewPhoto,
   clearPreview
 };

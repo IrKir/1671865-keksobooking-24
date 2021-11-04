@@ -1,4 +1,4 @@
-import {onDwellingChange, setAdFormValidation, setUserFormSubmit, resetForm} from'./form-validation.js';
+import {onDwellingChange, setAdFormValidation, setUserFormSubmitHandler, setFormResetHandler} from'./form-validation.js';
 import {deactivateForm} from './page-switch.js';
 import {setMap, setAddressValue, setPins} from './map.js';
 import {getData} from './api.js';
@@ -11,8 +11,8 @@ setAdFormValidation();
 deactivateForm();
 setMap();
 setAddressValue();
-setUserFormSubmit();
-resetForm();
+setUserFormSubmitHandler();
+setFormResetHandler();
 getData().then((response) => {
   setPins(response.slice(0, ELEMENTS_QUANTITY));
   setFilterChangeHandler(response);
