@@ -2,10 +2,11 @@ import { removePins, setPins } from './map.js';
 
 const RERENDER_DELAY = 500;
 const ELEMENTS_QUANTITY = 10;
-const Range = {
-  TYPE:'any',
-  MIN: 'low',
-  MEAN: 'middle',
+const ANY_RANGE = 'any';
+const priceRange = {
+  low: {min: 0, max: 10000},
+  middle: {min: 10000, max: 50000},
+  high: {min: 50000, max: 1000000},
 };
 
 const filterSelect = document.querySelector('.map__filters');
@@ -25,33 +26,28 @@ const checkFeatures = (element) => {
 };
 
 const checkType = (element) => {
-  if (housingSelect.value === Range.TYPE) {
+  if (housingSelect.value === ANY_RANGE) {
     return true;
   }
   return element.offer.type === housingSelect.value;
 };
 
 const checkNumberRooms = (element) => {
-  if (roomsSelect.value === Range.TYPE) {
+  if (roomsSelect.value === ANY_RANGE) {
     return true;
   }
   return element.offer.rooms === +roomsSelect.value;
 };
 
 const checkPrice = (element) => {
-  if (priceSelect.value === Range.TYPE) {
+  if (priceSelect.value === ANY_RANGE) {
     return true;
-  } else if (priceSelect.value === Range.MIN) {
-    return element.offer.price <= 10000;
-  } else if (priceSelect.value === Range.MEAN) {
-    return element.offer.price > 10000 && element.offer.price <= 50000;
-  } else {
-    return element.offer.price > 50000;
   }
+  return element.offer.price >= priceRange[priceSelect.value].min &&  element.offer.price <= priceRange[priceSelect.value].max;
 };
 
 const checkGuests = (element) => {
-  if (guestsSelect.value === 'any') {
+  if (guestsSelect.value === ANY_RANGE) {
     return true;
   }
   return element.offer.guests === +guestsSelect.value;
