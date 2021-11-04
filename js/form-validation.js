@@ -116,15 +116,15 @@ const clearForm = () => {
   filterForm.reset();
   clearPreview();
   resetMapAndMarker();
+  getData().then((response) => {
+    setPins(response.slice(0, ELEMENTS_QUANTITY));
+    setFilterChangeHandler(response);
+  });
 };
 
 const resetForm = () => {
   buttonReset.addEventListener('click', () => {
     clearForm();
-    getData().then((response) => {
-      setPins(response.slice(0, ELEMENTS_QUANTITY));
-      setFilterChangeHandler(response);
-    });
   });
 };
 
