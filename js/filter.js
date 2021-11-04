@@ -16,13 +16,11 @@ const roomsSelect = filterSelect.querySelector('#housing-rooms');
 const guestsSelect = filterSelect.querySelector('#housing-guests');
 
 const checkFeatures = (element) => {
-  const featuresSelect = filterSelect.querySelectorAll('.map__checkbox:checked');
+  const featuresSelect = filterSelect.querySelectorAll('input[name="features"]:checked');
   if (!element.offer.features) {
     return false;
   }
-  const checkedFeatures = [...featuresSelect].map((el) => el.value);
-  const filters = checkedFeatures.filter((i) => element.offer.features.includes(i));
-  return checkedFeatures.length === filters.length;
+  return Array.from(featuresSelect).every((feature) => element.offer.features.includes(feature.value));
 };
 
 const checkType = (element) => {
