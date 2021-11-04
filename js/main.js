@@ -11,9 +11,10 @@ setAdFormValidation();
 deactivateForm();
 setMap();
 setAddressValue();
-setUserFormSubmitHandler();
-setFormResetHandler();
+
 getData().then((response) => {
-  setPins(response.slice(0, ELEMENTS_QUANTITY));
+  setUserFormSubmitHandler(response);
+  setFormResetHandler(response);
   setFilterChangeHandler(response);
+  setPins(response.slice(0, ELEMENTS_QUANTITY));
 });

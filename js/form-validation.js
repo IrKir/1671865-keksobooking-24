@@ -1,8 +1,7 @@
-import {sendData, getData} from './api.js';
+import {sendData} from './api.js';
 import {showPopupSuccess, showPopupError} from './popup.js';
-import {resetMapAndMarker, setPins} from './map.js';
+import {resetMapAndMarker, setPins,  removePins} from './map.js';
 import {clearPreview} from './avatar.js';
-import {setFilterChangeHandler} from './filter.js';
 
 const MIN_AD_LENGTH = 30;
 const MAX_AD_LENGTH = 100;
@@ -102,29 +101,30 @@ const setAdFormValidation = () => {
   adGuestsNumber.addEventListener('change', onNumberRoomChange);
 };
 
-const setUserFormSubmitHandler = () => {
-  adForm.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-
-    const formData = new FormData(evt.target);
-    sendData(showPopupSuccess, showPopupError, formData);
-  });
-};
-
-const clearForm = () => {
+const clearForm = (elements) => {
   adForm.reset();
   filterForm.reset();
   clearPreview();
   resetMapAndMarker();
-  getData().then((response) => {
-    setPins(response.slice(0, ELEMENTS_QUANTITY));
-    setFilterChangeHandler(response);
+  removePins();
+  setPins(elements.slice(0, ELEMENTS_QUANTITY));
+};
+
+const setUserFormSubmitHandler = (elements) => {
+  adForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    const formData = new FormData(evt.target);
+    sendData(() => {
+      showPopupSuccess();
+      clearForm(elements);
+    }, showPopupError, formData);
   });
 };
 
-const setFormResetHandler = () => {
+const setFormResetHandler = (offers) => {
   buttonReset.addEventListener('click', () => {
-    clearForm();
+    clearForm(offers);
   });
 };
 

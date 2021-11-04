@@ -12,7 +12,6 @@ const setMap = () => {
     })
     .setView({
       lat: 35.6895,
-
       lng: 139.692,
     }, 10);
 
