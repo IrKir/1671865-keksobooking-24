@@ -4,6 +4,11 @@ import {createCustomPopup} from './card.js';
 let map;
 let mainPinMarker;
 const markersLayer = L.layerGroup();
+const DefaultСoordinates = {
+  LAT: 35.68171,
+  LNG: 139.75389,
+};
+const addressInput = document.querySelector('#address');
 
 const setMap = () => {
   map = L.map('map-canvas')
@@ -11,8 +16,8 @@ const setMap = () => {
       activateForm();
     })
     .setView({
-      lat: 35.6895,
-      lng: 139.692,
+      lat: DefaultСoordinates.LAT,
+      lng: DefaultСoordinates.LNG,
     }, 10);
 
   L.tileLayer(
@@ -29,8 +34,8 @@ const setMap = () => {
 
   mainPinMarker = L.marker(
     {
-      lat: 35.6895,
-      lng: 139.692,
+      lat: DefaultСoordinates.LAT,
+      lng: DefaultСoordinates.LNG,
     },
     {
       draggable: true,
@@ -70,22 +75,22 @@ const removePins = () => {
 
 const resetMapAndMarker = () => {
   mainPinMarker.setLatLng({
-    lat: 35.6895,
-    lng: 139.692,
+    lat: DefaultСoordinates.LAT,
+    lng: DefaultСoordinates.LNG,
   });
 
   map.setView({
-    lat: 35.6895,
-    lng: 139.692,
+    lat: DefaultСoordinates.LAT,
+    lng: DefaultСoordinates.LNG,
   }, 10);
   map.closePopup();
 };
 
 const setAddressValue = () => {
-  const address = document.querySelector('#address');
+  addressInput.value = `${DefaultСoordinates.LAT}, ${DefaultСoordinates.LNG}`;
   mainPinMarker.on('move', (evt) => {
     const mainMarkerAddress = (evt.target.getLatLng());
-    address.value = `${mainMarkerAddress.lat.toFixed(5)}, ${mainMarkerAddress.lng.toFixed(5)}`;
+    addressInput.value = `${mainMarkerAddress.lat.toFixed(5)}, ${mainMarkerAddress.lng.toFixed(5)}`;
   });
 };
 
