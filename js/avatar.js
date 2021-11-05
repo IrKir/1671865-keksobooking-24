@@ -2,7 +2,7 @@ const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 
 const avatarChooser = document.querySelector('.ad-form__field input[type=file]');
 const avatarPreview = document.querySelector('.setup-user-pic');
-const avatarPreviewClon = avatarPreview.cloneNode(true);
+const avatarPreviewClone = avatarPreview.cloneNode(true);
 const fileChooser = document.querySelector('.ad-form__upload input[type=file]');
 const filePreview = document.querySelector('.ad-form__photo');
 
@@ -23,14 +23,14 @@ fileChooser.addEventListener('change', () => {
 
   if (matches) {
 
-    avatarPreviewClon.src = URL.createObjectURL(file);
-    filePreview.append(avatarPreviewClon);
+    avatarPreviewClone.src = URL.createObjectURL(file);
+    filePreview.append(avatarPreviewClone);
   }
 });
 
 const clearPreview = () => {
   avatarPreview.src = 'img/muffin-grey.svg';
-  avatarPreviewClon.remove();
+  avatarPreviewClone.remove();
 };
 
 export {
