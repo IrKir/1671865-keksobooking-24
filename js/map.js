@@ -27,7 +27,7 @@ const setMap = () => {
   ).addTo(map);
 
   const mainPinIcon = L.icon({
-    iconUrl: '../img/main-pin.svg',
+    iconUrl: './img/main-pin.svg',
     iconSize: [52, 52],
     iconAnchor: [26, 52],
   });
@@ -49,7 +49,7 @@ const setMap = () => {
 const setPins = (finalArray) => {
   finalArray.map((element) => {
     const icon = L.icon({
-      iconUrl: '../img/pin.svg',
+      iconUrl: './img/pin.svg',
       iconSize: [40, 40],
       iconAnchor: [20, 40],
     });
